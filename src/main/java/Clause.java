@@ -43,6 +43,8 @@ public class Clause {
    
       
    public static void main(String[] args)throws IOException {
+	   Scanner input = new Scanner(new FileReader("Adjective.txt"));
+
    
       System.out.println();
       Clause c = new Clause();

@@ -5,6 +5,7 @@ import simplenlg.phrasespec.*;
 import simplenlg.features.*;
 import java.util.*;
 import java.io.*;
+import java.io.FileReader;
 //mistake = off of only one noun
 
 public class NounPhrase {
@@ -36,7 +37,7 @@ public class NounPhrase {
          for(int i = likely(); i>=0; i--) 
          {
             NPPhraseSpec n3p = nlgFactory.createNounPhrase(a.split(" ")[1]);//creates a phrase
-         
+         System.out.print("runs");
          
             if(a.split(" ")[0].length()>=6 && 
                     !(a.split(" ")[0].substring(0,6).equals("1.2.2.") 
@@ -112,7 +113,10 @@ public class NounPhrase {
    
    public static String ranNoun(boolean whole)throws IOException
    {
+	   System.out.println("errorFound");
       Scanner input = new Scanner(new FileReader("Noun.txt"));
+	   System.out.println("error Not  Found");
+
       ArrayList<String> nouns= new ArrayList();
       while(input.hasNext())
          nouns.add(input.nextLine());

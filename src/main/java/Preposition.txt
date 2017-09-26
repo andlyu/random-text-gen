@@ -1,0 +1,12 @@
+-1 place
+1.4 under
+1.5 near
+1.6 in 
+1.6.1 at
+-2 direction
+2.1 to
+2.2 from
+3 about
+4 on
+5 with
+6 using
