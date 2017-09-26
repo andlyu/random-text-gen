@@ -11,8 +11,8 @@
 2.2 small
 2.2.1 tiny
 2.2.2 short
-2.2.3 skiny
--3 collor
+2.2.3 skinny
+-3 color 
 3.1 red
 3.1.1 red
 3.1.2 orange

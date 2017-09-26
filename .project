@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
+<<<<<<< HEAD
 	<name>Gradle-random-TextGen</name>
 	<comment>Project Gradle-random-TextGen created by Buildship.</comment>
+=======
+	<name>random-text-gen(wrong)</name>
+	<comment></comment>
+>>>>>>> branch 'master' of https://github.com/andlyu/random-text-gen.git
 	<projects>
 	</projects>
 	<buildSpec>
