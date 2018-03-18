@@ -18,86 +18,7 @@ public class TestMain {
       
    public static void main(String[] args)throws IOException {
    
-   
-    /*/  NLGElement s1 = nlgFactory.createSentence("my dog is happy");   /// FIRST TRY
-   //     String output = realiser.realiseSentence(s1);
-   //     System.out.println(output);
-     
-      NPPhraseSpec main = nlgFactory.createNounPhrase(ranLife());
-      main.setDeterminer(ranDet());
-      NPPhraseSpec sec = nlgFactory.createNounPhrase(ranLife());
-      sec.setDeterminer(ranDet());
-      SPhraseSpec p = nlgFactory.createClause(main, ranVerb(new String[]{"1.2.2.1"},false), sec);
-      NPPhraseSpec place = nlgFactory.createNounPhrase(ranNoun(new String[]{"3."}));
-      place.setDeterminer(ranDet());
-      PPPhraseSpec pp = nlgFactory.createPrepositionPhrase();
-      pp.addComplement(place);
-      pp.setPreposition("in");
-      p.addComplement(pp);
-      String  output = realiser.realiseSentence(p);
-      System.out.println(output);
-      //   System.out.println("No,this is actualy happening !!");*/  
-      //FIRST TRYFIRST TRY    FIRST TRY      FIRST TRY      FIRST TRY      FIRST TRY      
-     /* for(int repeat = 0; repeat <10; repeat ++)
-      {
-         String v1 = ranVerb(new String[]{"1","2"},true);
-         SPhraseSpec p;
-         if(posNouns(v1).contains("-"))
-         {
-         
-            String n1 = ranNoun(posNouns(v1).split("-")[0].split(","),true);
-            String n2 = ranNoun(posNouns(v1).split("-")[1].split(","),true);
-            NPPhraseSpec n1p = nlgFactory.createNounPhrase(n1.split(" ")[1]);
-            n1p.addModifier(ranAdj(nounToAdj(n1),false));
-            n1p.setDeterminer(ranDet());
-            NPPhraseSpec n2p = nlgFactory.createNounPhrase(n2.split(" ")[1]);
-            n2p.addModifier(ranAdj(nounToAdj(n2),false));
-            n2p.setDeterminer(ranDet());
-            p = nlgFactory.createClause(n1p, word(v1),n2p);
-         }
-         else
-         {     
-         //     if(v1.countains("/"))
-         //                 String n1 = ranNoun(v1.split(" ")[2].split("/").split(","));       
-            String n1 = ranNoun(posNouns(v1).split(","));
-            NPPhraseSpec n1p = nlgFactory.createNounPhrase(n1);
-            n1p.setDeterminer(ranDet());
-            p = nlgFactory.createClause(n1p, word(v1));
-         }
-         // changing preposition
-         PPPhraseSpec pp = null;
-         if(v1.contains("/"))// temporary
-         {
-            int prepI = (int)( Math.random()*posPreps(v1).split("--").length);// prepI = instance of prep in verb Def
-            String prepS = ranPrep(posPreps(v1).split("--")[prepI].split("-")[0].split(",")); // prepS = preposition String
-            NPPhraseSpec prepNP = nlgFactory.createNounPhrase(ranNoun(posPreps(v1).split("--")[prepI].split("-")[1].split(",")));// prepositional phrase
-            prepNP.setDeterminer(ranDet());
-            pp = nlgFactory.createPrepositionPhrase();
-            pp.addComplement(prepNP);
-            pp.setPreposition(prepS);
-          //  if(Math.random()>.5)
-            p.addComplement(pp);
-            // creates a random tense
-            if (Math.random()<.33333)
-            p.setFeature(Feature.TENSE, Tense.PAST);
-            if (Math.random()<.5)
-            p.setFeature(Feature.TENSE, Tense.FUTURE);
-          //  p.setFeature(Feature.COMPLEMENTISER, "because");
-         // creates random tense
-         }
-         else{
-         /*//* first prep preposition
-            NPPhraseSpec place = nlgFactory.createNounPhrase(ranNoun(new String[]{"3."}));// prepositional phrase
-            place.setDeterminer(ranDet());
-            pp = nlgFactory.createPrepositionPhrase();
-            pp.addComplement(place);
-            pp.setPreposition("in");*//*///works wrong
-         }
-       //  if(Math.random()>.5)
-         //p.addComplement(pp);
-            
-         String output = realiser.realiseSentence(p);*/
-      for(int i = 0; i<50; i++)
+      for(int i = 0; i<150; i++)
       {
          SPhraseSpec ind = makeSentance();
          SPhraseSpec dep = makeSentance();
@@ -639,7 +560,7 @@ public class TestMain {
          for(int j = likely(); j>0; j--)  
             n3p.addPreModifier(ranAdj(nounToAdj(n1),false));
          n1p.addCoordinate(n3p);
-         System.out.println(realiser.realise(n1p));
+        // System.out.println(realiser.realise(n1p));
       }
       return n1p;
       

@@ -21,6 +21,7 @@ public class Clause {
 	private static NLGFactory nlgFactory = new NLGFactory(lexicon);
 	private static Realiser realiser = new Realiser(lexicon);
 
+
 	public NounPhrase getClassNoun() {
 		return classNoun;
 	}// just Basics
@@ -65,6 +66,10 @@ public class Clause {
 		return (realiser.realiseSentence(sent));
 	}
 
+	/**
+	 * @param args
+	 * @throws IOException
+	 */
 	public static void main(String[] args) throws IOException {
 		Scanner input = new Scanner(new FileReader("Adjective.txt"));
 
