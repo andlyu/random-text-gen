@@ -2,10 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/test/java"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"/>
-	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
-	<classpathentry kind="lib" path="C:/Users/1404334/Desktop/simplenlg-master/lib/junit-4.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/1404334/Desktop/simplenlg-master/lib/lexAccess2011dist.jar"/>
-	<classpathentry kind="lib" path="C:/Users/1404334/Desktop/simplenlg-master/lib/lvg2011api.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
