@@ -1,4 +1,34 @@
+Sample Sentance.java<br/>
+Independent clauses. <br/>
+
+	
+	Emily appeared at a field.
+	Jennifer will sleep at the house.
+	A mud and a gray joke are a baby with the car.
+	Hannah will opperate the purple boat in a sea.
+	James, Robert and Robert will write the text on the wood.
+	Oliver tells a poem with a Risk.
+	Hannah wrote the textbook on a cloth.
+	The student opperates a canoe in a pool.
+	Jacob and Barbara tell the poem with a man.
+	Oliver senses the Robert in the river.
+	Oliver and delicious Harry drew the sketch with the pencil.
+	The big beast and the orange pet appeared with the game.
+	Robert is with a game.
+	The small river will open at the night.
+	Freezing Jack and swift Jacob will opperate the truck at the field.
+	Emily plays near a store.
+	A Risk will become with a bush.
+	The girl has a purple store with the vegetable.
+	Sophia follows a big George with a game.
+	Old Sarah will draw a noisy drawing with a brush.
+	Deafening Luke creates a textbook with the Risk.
+
+	
 Clause.java sample text<br/>
+
+Some of the sentences use either previous subject or object phrases as the subject.<br/>
+The second paragraph builds sentences from the same clause.<br/>
 
 	A person writes the green textbook with the pen.
 	The green textbook has a quiet pet with a drink.
@@ -24,33 +54,11 @@ Clause.java sample text<br/>
 	The empty monkey and a wide, tasteless beast are full.
 	The empty monkey and a wide, tasteless beast cover strong Jessica with a mud.
 	
-Sample Sentance.java
 
-	James, Robert and Robert will write the text on the wood.
-	Oliver tells a poem with a Risk.
-	Hannah wrote the textbook on a cloth.
-	The student opperates a canoe in a pool.
-	Jacob and Barbara tell the poem with a man.
-	Oliver senses the Robert in the river.
-	Oliver and delicious Harry drew the sketch with the pencil.
-	The big beast and the orange pet appeared with the game.
-	Robert is with a game.
-	The small river will open at the night.
-	Freezing Jack and swift Jacob will opperate the truck at the field.
-	Emily plays near a store.
-	A Risk will become with a bush.
-	The girl has a purple store with the vegetable.
-	Sophia follows a big George with a game.
-	Old Sarah will draw a noisy drawing with a brush.
-	Deafening Luke creates a textbook with the Risk.
-	Emily appeared at a field.
-	Jennifer will sleep at the house.
-	A mud and a gray joke are a baby with the car.
-	Hannah will opperate the purple boat in a sea.
-	
 Sample TestMain.java<br/>
 Compound sentences, randomly connected with either "because" or "since"<br/>
-The second sentence is built off of the first sentence's object or subject<br/>
+The second clause is built off of the first sentence's object or subject<br/>
+Since there is not other corelation, the sentances are illogical. <br/>
 
 	A student chased the child to an ocean because the child hears the animal.
 	A girl flies the purple plane near the ocean while a plane becomes.
