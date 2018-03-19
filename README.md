@@ -5,7 +5,7 @@
 
 #### purpose:
 I wanted a program that could generate random text. The main criteria is that it should be plausible. <br/>
-This means that a *A pencil can fly* because *a pencil can fly across a room if somebody threw it*
+This means that a "*A pencil can fly*" because "*a pencil can fly across a room if somebody threw it*" <br/>
 Initially my goal was to start with sentences, and to build up to stories, but I couldn't properly connect two sentences. 
 
 ### Database organization
