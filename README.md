@@ -1,8 +1,10 @@
 # random-text-gen
-##### purpose:
+
+### PRODUCT:
+#### Read [DEMO.md] (https://github.com/andlyu/random-text-gen/blob/master/DEMO.md)
+
+#### purpose:
 generate random text<br/>
-##### Examples:
-Read DEMO.md<br/>
 
 ### Database organization
 

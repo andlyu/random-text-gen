@@ -1,4 +1,8 @@
-Sample Sentance.java<br/>
+## DEMO
+
+#### This is the text that is produced when it is run
+
+### Sample Sentance.java<br/>
 Independent clauses. <br/>
 
 	
@@ -25,7 +29,7 @@ Independent clauses. <br/>
 	Deafening Luke creates a textbook with the Risk.
 
 	
-Clause.java sample text<br/>
+### Clause.java sample text<br/>
 
 Some of the sentences use either previous subject or object phrases as the subject.<br/>
 The second paragraph builds sentences from the same clause.<br/>
@@ -55,7 +59,7 @@ The second paragraph builds sentences from the same clause.<br/>
 	The empty monkey and a wide, tasteless beast cover strong Jessica with a mud.
 	
 
-Sample TestMain.java<br/>
+### Sample TestMain.java<br/>
 Compound sentences, randomly connected with either "because" or "since"<br/>
 The second clause is built off of the first sentence's object or subject<br/>
 Since there is not other corelation, the sentances are illogical. <br/>
