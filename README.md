@@ -1,7 +1,7 @@
 # random-text-gen
 
 ### PRODUCT:
-#### Read [DEMO.md] (https://github.com/andlyu/random-text-gen/blob/master/DEMO.md)
+#### Read [DEMO.md](https://github.com/andlyu/random-text-gen/blob/master/DEMO.md)
 
 #### purpose:
 generate random text<br/>
