@@ -1,10 +1,11 @@
 # random-text-gen
 
-## PRODUCT:
+### PRODUCT:
 ##### Read [DEMO.md](https://github.com/andlyu/random-text-gen/blob/master/DEMO.md)
 
 #### purpose:
-generate random text<br/>
+Have a program that could generate random text. The main criteria is that it should be plausible. <br/>
+This means that a *A pencil can fly* because *a pencil can fly across a room if somebody threw it*s
 
 ### Database organization
 
