@@ -4,9 +4,9 @@ generate random text<br/>
 ##### Examples:
 Read DEMO.md<br/>
 
-#### Database organization
+### Database organization
 
-Noun.txt <br/>
+#### Noun.txt <br/>
 
 	1 person 1,2,3,4,5 10.1,10.2,10.2.1
 	1.1 child P 10.2
@@ -15,7 +15,7 @@ Noun.txt <br/>
 	1.1.3 student P 10.2.1.2
 	1.1.4 baby P 10.2.1.3
 
-Verb.txt <br/>
+#### Verb.txt <br/>
 
 	1.2.1.1 sense 1,2-1,2,3,4/1.5,1.6-3
 	1.2.1.1.1 see 1.1.1,1.1.2,1.1.3,2-1,2,3,4/1.5,1.6-3
@@ -23,9 +23,9 @@ Verb.txt <br/>
 	1.2.1.1.3 hear 1,2-1,2/1.5,1.6-3
 	1.2.1.1.4 touch 1,2-1,2,4/1.5,1.6-3
 
-#### Explanation
+### Explanation
 
-Noun.txt format <br/>
+#### Noun.txt format <br/>
 
 <ul>	
 <li>The number and period sequence is a words iD</li>
@@ -41,7 +41,7 @@ Noun.txt format <br/>
 
 </ul>
 
-Verb.txt format <br/>
+#### Verb.txt format <br/>
 
 <ul>	
 <li>The number and period sequence is a words iD
@@ -57,7 +57,7 @@ Verb.txt format <br/>
 </ol>
 </ul>
 
-#### Example
+### Example
 
 In the example above, if we start "see", for the subject we can choose any nouns that start with the iD 1.1.1, 1.1.2, 1,1,3 and 2.<br/>
 
@@ -79,8 +79,8 @@ SympleNLG does all of the adjustment with placing periods, capitalization, and c
 Thanks SympleNLG
 
 
-#### Conclusion
+### Conclusion
 The clauses turn out being all right, however when connecting multiple clauses, they become too illogical. It could be solved by adding more parameters to the vocab files, but I thought that using NLP to create the text files would be much more efficient. 
 
-####Citations<br/>
+### Citations<br/>
 I used SympleNLG for creating the sentences out of the words that I fed to it. 
