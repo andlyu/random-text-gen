@@ -90,5 +90,8 @@ Thanks SympleNLG
 ### Conclusion
 The clauses turn out being all right, however when connecting multiple clauses, they become too illogical. It could be solved by adding more parameters to the vocab files, but I thought that using NLP to create the text files would be much more efficient. 
 
+## Disclaimer
+Sorry that much of the code uses bad practices. Much of it was writen before I knew what to do and what not to do. 
+
 ### Citations<br/>
 I used SympleNLG for creating the sentences out of the words that I fed to it. 
