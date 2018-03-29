@@ -52,7 +52,7 @@ public class PrepPhrase
          classPreposition = ranPrep(posPreps(a.getClassVerb()).split("--")[prepI].split("-")[0].split(","),true); // prepS = preposition String
          place = new NounPhrase(NounPhrase.ranNoun(posPreps(a.getClassVerb()).split("--")[prepI].split("-")[1].split(","),true));// prepositional phrase
          prepPhrase = nlgFactory.createPrepositionPhrase();
-         prepPhrase.setDeterminer(Clause.ranDet());
+         prepPhrase.setDeterminer(NounPhrase.ranDet());
          prepPhrase.addComplement(place.toNPPhraseSpec());
          prepPhrase.setPreposition(classPreposition.split(" ")[1]);  
       }
@@ -73,7 +73,7 @@ public class PrepPhrase
             return;
          }
          prepPhrase = nlgFactory.createPrepositionPhrase();
-         prepPhrase.setDeterminer(Clause.ranDet());
+         prepPhrase.setDeterminer(NounPhrase.ranDet());
          prepPhrase.addComplement(place.toNPPhraseSpec());
          prepPhrase.setPreposition(classPreposition.split(" ")[1]);
       }
@@ -152,7 +152,7 @@ public class PrepPhrase
    }
    
     //returns the preposition-pairing part of a verb defention
-   private static String posPreps(String a)
+   public static String posPreps(String a)
    {
       String out = a.split(" ")[2];
       if(out.contains("/"))
@@ -160,6 +160,19 @@ public class PrepPhrase
       return out;
    
    }
+	// retruns prep with certain ID
+	private static String certPrep(String a) throws IOException {
+		Scanner input = new Scanner(new FileReader(PREPOSITION_FILE));
+		String prep;
+		while (input.hasNext()) {
+			prep = input.nextLine();
+			if (prep.split(" ")[0].equals(a))
+				return prep.split(" ")[1];
+		}
+		return null;
+	}
+	
+
    
 
 

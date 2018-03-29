@@ -52,7 +52,7 @@ public class Noun {
 				noun.setDeterminer(ranDet());
 			else if (classNoun.split(" ")[0].length() < 6)
 				noun.setDeterminer(ranDet());// ads determiner for small indexes
-			addAdj(noun, classNoun.split(" ")[1]);
+			NounPhrase.addAdj(noun, classNoun.split(" ")[1]);
 		} catch (IOException ex) {
 		}
 	}
@@ -67,7 +67,7 @@ public class Noun {
 				noun.setDeterminer(ranDet());
 			else if (classNoun.split(" ")[0].length() < 6)
 				noun.setDeterminer(ranDet());// ads determiner for small indexes
-			addAdj(noun, classNoun.split(" ")[1]);
+			NounPhrase.addAdj(noun, classNoun.split(" ")[1]);
 		} catch (IOException ex) {
 		}
 	}
@@ -81,16 +81,9 @@ public class Noun {
 				noun.setDeterminer(ranDet());
 			else if (classNoun.split(" ")[0].length() < 6)
 				noun.setDeterminer(ranDet());// ads determiner for small indexes
-			addAdj(noun, classNoun.split(" ")[1]);
+			NounPhrase.addAdj(noun, classNoun.split(" ")[1]);
 		} catch (IOException ex) {
 		}
-	}
-
-	// Pre: n1p is NPPhraseSpec to which to add the adj, n1 is the NounWord
-	public static void addAdj(NPPhraseSpec n1p, String n1) throws IOException {
-		for (int j = likely(); j > 0; j--)
-			n1p.addPreModifier(ranAdj(nounToAdj(n1), false));
-
 	}
 
 	public static String ranNoun(boolean whole) throws IOException {
@@ -133,16 +126,18 @@ public class Noun {
 			nouns.add(input.nextLine());
 		ArrayList<String> noun = new ArrayList(); // Group : upGroups(b.getClassNoun())
 		for (int i = 0; i < nouns.size(); i++) {//////// Goes through nouns
-			if (wordWorks(nouns.get(i), a) && (group == null || containsNone(group, upGroups(nouns.get(i)))))
+			if (wordWorks(nouns.get(i), a)
+					&& (group == null || Probability.containsNone(group, upGroups(nouns.get(i)))))
 				noun.add(nouns.get(i));
 
 		} ///////////////// ends the nouns
 		if (noun.size() == 0)// DEBUG
 			System.out.println("NounPhrase YOOXI");
 		for (int i = 70; i < nouns.size(); i++) {//////// Goes through nouns
-			if (wordWorks(nouns.get(i), a) && (group == null || containsNone(group, upGroups(nouns.get(i)))))// WORD
-																												// DOESN"T
-																												// WORK
+			if (wordWorks(nouns.get(i), a)
+					&& (group == null || Probability.containsNone(group, upGroups(nouns.get(i)))))// WORD
+				// DOESN"T
+				// WORK
 				noun.add(nouns.get(i));
 
 		} ///////////////// ends the nouns
@@ -156,23 +151,14 @@ public class Noun {
 		return null;// WORK
 	}
 
+	public static String word(String a) {
+		return a.split(" ")[1];
+	}
+
 	public static String ranDet() {
 		if (Math.random() < .5)
 			return "a";
 		return "the";
-	}
-
-	// returns true if there are none a's in the array b
-	private static boolean containsNone(String[] a, String[] b) {
-		if (b == null)
-			return false;// Not Sure
-		for (String x : a) {
-			for (String y : b)
-				if (x.equals(y) || ("-" + x).equals(y)) {
-					return false;
-				}
-		}
-		return true;
 	}
 
 	// pre: noun is a whole noun
@@ -236,86 +222,9 @@ public class Noun {
 		return out;
 	}
 
-	public static String ranAdj(String[] a, boolean whole) throws IOException {
-		Scanner input = new Scanner(new FileReader(ADJECTIVE_FILE));
-		ArrayList<String> verbs = new ArrayList();
-		while (input.hasNext())
-			verbs.add(input.nextLine());
-		ArrayList<String> verb = new ArrayList();
-		String g;
-		for (int i = 0; i < verbs.size(); i++) {//////// Goes through verbs
-			if (wordWorks(verbs.get(i), a))
-				verb.add(verbs.get(i));
-		} ///////////////// ends the verbs
-		if (verb.size() == 0)
-			return null;
-		if (!whole) {
-			return verb.get((int) (Math.random() * verb.size())).split(" ")[1];
-		}
-		return verb.get((int) (Math.random() * verb.size()));
-	}
-
-	// returns a String [] of adjective indecies which corelate with the noun
-	// I THINK THIS IS WRONG
-	public static String[] nounToAdj(String n) throws IOException {
-
-		String iD = n.split(" ")[0];
-		String[] iDs = iD.split("\\.");// makes the array of the total number of IDs, not the right iDs
-		int count = 0;
-		iDs[count++] = iD;
-		while (iD.contains(".")) {
-			iD = iD.substring(0, iD.lastIndexOf("."));
-			iDs[count++] = iD;
-		}
-
-		ArrayList all = new ArrayList();
-		Scanner input = new Scanner(new FileReader(NOUN_FILE));
-		{
-			String a = null; // to store input
-			String[] some = null; // some of the adjective IDs
-			count = iDs.length - 1;
-			while (input.hasNextLine() && count > -1) {
-				a = input.nextLine();
-				if (a.startsWith(iDs[count] + " ") || a.startsWith("-" + iDs[count] + " ")) {
-					try {
-						if (a.split(" ").length > 2 && a.split(" ")[2].charAt(0) != 'P')// P stands for pass
-							some = a.split(" ")[2].split(",");
-					} catch (Exception ignored) {
-						System.out
-								.println(a + "HEHEHEHHEHEHEHEHEHHEHEHEHHEHHEHEHEHHEHEHEHHEHHEHEHEHHEHEHEHHEHHEHHEHEH");
-					}
-					if (some == null)
-						return null;
-					for (int i = 0; i < some.length; i++)// RUN ERR
-						all.add(some[i]);
-					count--;
-
-				}
-			}
-		}
-		String[] out = new String[all.size()];// to be returned in String [] format
-		for (int i = 0; i < out.length; i++)
-			out[i] = (String) all.get(i); // could make the String earlier
-		return out;
-	}
-
-	// standard factor is .3
-	// for the pourpose of having many 1s, few 2s and even less 3s
-	private static int likely() {
-		int out = 0;
-		double rand = Math.random();
-		double factor = .4;
-		double curCompare = factor;
-		while (rand < curCompare) {
-			curCompare *= factor;
-			curCompare *= factor;
-			out++;
-		}
-		return out;
-	}
 
 	// returs true is a has the bigining of noun
-	private static boolean wordWorks(String word, String[] a) {
+	public static boolean wordWorks(String word, String[] a) {
 		if (a == null)
 			return true;
 		for (int i = 0; i < a.length; i++)// RUN ERR

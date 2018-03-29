@@ -4,9 +4,8 @@ import simplenlg.realiser.english.*;
 import simplenlg.phrasespec.*;
 import simplenlg.features.*;
 import java.util.*;
-import java.io.*;
-import java.io.FileReader;
 //mistake = off of only one noun
+import java.io.*;
 
 public class NounPhrase {
 	private String classNoun;// long, with all of the information
@@ -18,7 +17,8 @@ public class NounPhrase {
 
 	public static final String ADJECTIVE_FILE = "lib/Adjective.txt";
 	public static final String NOUN_FILE = "lib/Noun.txt";
-	
+	public static final String VERB_FILE = "lib/Verb.txt";
+
 	public NounPhrase() {
 		try {
 			phrase = manyNounSbjs();
@@ -154,37 +154,6 @@ public class NounPhrase {
 
 	// pre: a is array of possible numbers, b is the group the noun must have
 	// whole means whetehr to return whole noun defenition
-	public static String ranNoun(String[] a, String[] group, boolean whole) throws IOException// WORK
-	{
-		Scanner input = new Scanner(new FileReader(NOUN_FILE));
-		ArrayList<String> nouns = new ArrayList();
-		group = onlyNot(group); // goes to only "!"
-		while (input.hasNext())
-			nouns.add(input.nextLine());
-		ArrayList<String> noun = new ArrayList(); // Group : upGroups(b.getClassNoun())
-		for (int i = 0; i < nouns.size(); i++) {//////// Goes through nouns
-			if (wordWorks(nouns.get(i), a) && (group == null || containsNone(group, upGroups(nouns.get(i)))))
-				noun.add(nouns.get(i));
-
-		} ///////////////// ends the nouns
-		if (noun.size() == 0)// DEBUG
-			System.out.println("NounPhrase YOOXI");
-		for (int i = 70; i < nouns.size(); i++) {//////// Goes through nouns
-			if (wordWorks(nouns.get(i), a) && (group == null || containsNone(group, upGroups(nouns.get(i)))))// WORD
-																												// DOESN"T
-																												// WORK
-				noun.add(nouns.get(i));
-
-		} ///////////////// ends the nouns
-		if (!whole)
-			return noun.get((int) (Math.random() * noun.size())).split(" ")[1];
-		try {
-			return noun.get((int) (Math.random() * noun.size()));
-		} catch (Exception ignored) {
-			System.out.println("NounPhrase YOOXI");
-		}
-		return null;// WORK
-	}
 
 	/*
 	 * OLD CODE, public static String ranNoun(String [] a,String [] group, boolean
@@ -250,6 +219,77 @@ public class NounPhrase {
 				return true;
 		}
 		return false;
+	}
+
+	// pre: a is array of possible numbers, b is the group the noun must have
+	// whole means whetehr to return whole noun defenition
+	public static String ranNoun(String[] a, String[] group, boolean whole) throws IOException// WORK
+	{
+		Scanner input = new Scanner(new FileReader(NOUN_FILE));
+		ArrayList<String> nouns = new ArrayList();
+		group = onlyNot(group); // goes to only "!"
+		while (input.hasNext())
+			nouns.add(input.nextLine());
+		ArrayList<String> noun = new ArrayList(); // Group : upGroups(b.getClassNoun())
+		for (int i = 0; i < nouns.size(); i++) {//////// Goes through nouns
+			if (wordWorks(nouns.get(i), a) && (group == null || containsNone(group, upGroups(nouns.get(i)))))
+				noun.add(nouns.get(i));
+
+		} ///////////////// ends the nouns
+		if (noun.size() == 0)// DEBUG
+			System.out.println("NounPhrase YOOXI");
+		for (int i = 70; i < nouns.size(); i++) {//////// Goes through nouns
+			if (wordWorks(nouns.get(i), a) && (group == null || containsNone(group, upGroups(nouns.get(i)))))// WORD
+																												// DOESN"T
+																												// WORK
+				noun.add(nouns.get(i));
+
+		} ///////////////// ends the nouns
+		if (!whole)
+			return noun.get((int) (Math.random() * noun.size())).split(" ")[1];
+		try {
+			return noun.get((int) (Math.random() * noun.size()));
+		} catch (Exception ignored) {
+			System.out.println("NounPhrase YOOXI");
+		}
+		return null;// WORK
+	}
+
+	public static String[] nounToVerb(String n) throws IOException {
+
+		String iD = n.split(" ")[0];
+		String[] iDs = iD.split("\\.");// makes the array of the total number of IDs, not the right iDs
+		int count = 0;
+		iDs[count++] = iD;
+		while (iD.contains(".")) {
+			iD = iD.substring(0, iD.lastIndexOf("."));
+			iDs[count++] = iD; // noun IDs
+		}
+
+		ArrayList all = new ArrayList();
+		Scanner input = new Scanner(new FileReader(VERB_FILE));
+		{
+			String a = null; // to store input
+			String[] some = null; // some of the adjective IDs
+			count = iDs.length - 1;
+			while (input.hasNextLine()) {
+				a = input.nextLine();
+				if (a.charAt(0) != '-') {
+					String[] pos = a.split(" ")[2].split("/")[0].split("-")[0].split(",");// arrayList containing
+																							// posible Nouns
+					for (int i = 0; i < iDs.length; i++)
+						for (int j = 0; j < pos.length; j++)
+							if (pos[j].equals(iDs[i])) {
+								all.add(a);
+								break;
+							}
+				}
+			}
+		}
+		String[] out = new String[all.size()];// to be returned in String [] format
+		for (int i = 0; i < out.length; i++)
+			out[i] = (String) all.get(i); // could make the String earlier
+		return out;
 	}
 
 	//////////////////// GROUPS///////////////////////////////////

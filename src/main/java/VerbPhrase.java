@@ -175,4 +175,12 @@ public class VerbPhrase {
 		return false;
 	}
 
+	// returns the Noun-pairing part of a verb defention
+	public static String posNouns(String a) {
+		String out = a.split(" ")[2];
+		if (out.contains("/"))
+			out = out.split("/")[0];
+		return out;
+	}
+
 }
