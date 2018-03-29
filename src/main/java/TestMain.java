@@ -15,7 +15,12 @@ public class TestMain {
    private static Lexicon lexicon = Lexicon.getDefaultLexicon();
    private static NLGFactory nlgFactory = new NLGFactory(lexicon);
    private static Realiser realiser = new Realiser(lexicon);
-      
+     
+	public static final String ADJECTIVE_FILE = "lib/Adjective.txt";
+	public static final String NOUN_FILE = "lib/Noun.txt";
+	public static final String PREPOSITION_FILE = "lib/Preposition.txt";
+	public static final String VERB_FILE = "lib/Verb.txt";
+   
    public static void main(String[] args)throws IOException {
    
       for(int i = 0; i<150; i++)
@@ -50,7 +55,7 @@ public class TestMain {
     
    public static String ranNoun()throws IOException
    {
-      Scanner input = new Scanner(new FileReader("Noun.txt"));
+      Scanner input = new Scanner(new FileReader(NOUN_FILE));
       ArrayList<String> nouns= new ArrayList();
       while(input.hasNext())
          nouns.add(input.nextLine());
@@ -59,7 +64,7 @@ public class TestMain {
    
    public static String ranPlace()throws IOException
    {
-      Scanner input = new Scanner(new FileReader("Noun.txt"));
+      Scanner input = new Scanner(new FileReader(NOUN_FILE));
       ArrayList<String> nouns= new ArrayList();
       while(input.hasNext())
          nouns.add(input.nextLine());
@@ -74,7 +79,7 @@ public class TestMain {
    
    public static String ranLife()throws IOException
    {
-      Scanner input = new Scanner(new FileReader("Noun.txt"));
+      Scanner input = new Scanner(new FileReader(NOUN_FILE));
       ArrayList<String> nouns= new ArrayList();
       while(input.hasNext())
          nouns.add(input.nextLine());
@@ -92,7 +97,7 @@ public class TestMain {
    // returns a noun whose identification begins with one of the a array numbers; returns only 1 word
    public static String ranNoun(String [] a)throws IOException
    {
-      Scanner input = new Scanner(new FileReader("Noun.txt"));
+      Scanner input = new Scanner(new FileReader(NOUN_FILE));
       ArrayList<String> nouns= new ArrayList();
       while(input.hasNext())
          nouns.add(input.nextLine());
@@ -108,7 +113,7 @@ public class TestMain {
    //whole means whetehr to return whole noune defenition
    public static String ranNoun(String [] a, boolean whole)throws IOException
    {
-      Scanner input = new Scanner(new FileReader("Noun.txt"));
+      Scanner input = new Scanner(new FileReader(NOUN_FILE));
       ArrayList<String> nouns= new ArrayList();
       while(input.hasNext())
          nouns.add(input.nextLine());
@@ -126,7 +131,7 @@ public class TestMain {
    
    public static String ranVerb(String [] a, boolean whole)throws IOException
    {
-      Scanner input = new Scanner(new FileReader("Verb.txt"));
+      Scanner input = new Scanner(new FileReader(VERB_FILE));
       ArrayList<String> verbs= new ArrayList();
       while(input.hasNext())
          verbs.add(input.nextLine());
@@ -146,7 +151,7 @@ public class TestMain {
    
    public static String ranPrep(String [] a)throws IOException
    {
-      Scanner input = new Scanner(new FileReader("Preposition.txt"));
+      Scanner input = new Scanner(new FileReader(PREPOSITION_FILE));
       ArrayList<String> preps= new ArrayList();
       for(int i = 0; i<a.length; i++)
          a[i]=a[i].split("-")[0]; // ugly code, doesn't follow format
@@ -164,7 +169,7 @@ public class TestMain {
       
    public static String ranPrep(String [] a, boolean whole)throws IOException
    {
-      Scanner input = new Scanner(new FileReader("Preposition.txt"));
+      Scanner input = new Scanner(new FileReader(PREPOSITION_FILE));
       ArrayList<String> preps= new ArrayList();
       for(int i = 0; i<a.length; i++)
          a[i]=a[i].split("-")[0]; // ugly code, doesn't follow format
@@ -184,7 +189,7 @@ public class TestMain {
    
    public static String ranAdj(String [] a, boolean whole)throws IOException
    {
-      Scanner input = new Scanner(new FileReader("Adjective.txt"));
+      Scanner input = new Scanner(new FileReader(ADJECTIVE_FILE));
       ArrayList<String> verbs= new ArrayList();
       while(input.hasNext())
          verbs.add(input.nextLine());
@@ -223,7 +228,7 @@ public class TestMain {
    //retruns prep with certain ID
    private static String certPrep(String a) throws IOException
    {
-      Scanner input = new Scanner(new FileReader("Preposition.txt"));
+      Scanner input = new Scanner(new FileReader(PREPOSITION_FILE));
       String prep;
       while(input.hasNext())
       {
@@ -259,7 +264,7 @@ public class TestMain {
       }
    
       ArrayList all = new ArrayList();
-      Scanner input= new Scanner (new FileReader("Noun.txt"));
+      Scanner input= new Scanner (new FileReader(NOUN_FILE));
       {
          String a = null; // to store input
          String [] some = null; // some of the adjective IDs
@@ -299,7 +304,7 @@ public class TestMain {
       }
    
       ArrayList all = new ArrayList();
-      Scanner input= new Scanner (new FileReader("Verb.txt"));
+      Scanner input= new Scanner (new FileReader(VERB_FILE));
       {
          String a = null; // to store input
          String [] some = null; // some of the adjective IDs

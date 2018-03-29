@@ -13,6 +13,8 @@ public class PrepPhrase
    private String classPreposition;
    private String phrase;
 
+	public static final String PREPOSITION_FILE = "lib/Preposition.txt";
+   
    public NounPhrase getPlace(){
       return place;}
    public PPPhraseSpec getPrepPhrase(){
@@ -92,7 +94,7 @@ public class PrepPhrase
 //Post: returns the word
    public static String ranPrep(String [] a)throws IOException
    {
-      Scanner input = new Scanner(new FileReader("Preposition.txt"));
+      Scanner input = new Scanner(new FileReader(PREPOSITION_FILE));
       ArrayList<String> preps= new ArrayList();
       for(int i = 0; i<a.length; i++)
          a[i]=a[i].split("-")[0]; // ugly code, doesn't follow format
@@ -112,7 +114,7 @@ public class PrepPhrase
 //Post: returns the word at one of the indexes
    public static String ranPrep(String [] a, boolean whole)throws IOException
    {
-      Scanner input = new Scanner(new FileReader("Preposition.txt"));
+      Scanner input = new Scanner(new FileReader(PREPOSITION_FILE));
       ArrayList<String> preps= new ArrayList();
       for(int i = 0; i<a.length; i++)
          a[i]=a[i].split("-")[0]; // ugly code, doesn't follow format

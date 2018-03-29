@@ -16,6 +16,9 @@ public class NounPhrase {
 	private static NLGFactory nlgFactory = new NLGFactory(lexicon);
 	private static Realiser realiser = new Realiser(lexicon);
 
+	public static final String ADJECTIVE_FILE = "lib/Adjective.txt";
+	public static final String NOUN_FILE = "lib/Noun.txt";
+	
 	public NounPhrase() {
 		try {
 			phrase = manyNounSbjs();
@@ -96,7 +99,7 @@ public class NounPhrase {
 	}
 
 	public static String ranNoun() throws IOException {
-		Scanner input = new Scanner(new FileReader("Noun.txt"));
+		Scanner input = new Scanner(new FileReader(NOUN_FILE));
 		ArrayList<String> nouns = new ArrayList();
 		while (input.hasNext())
 			nouns.add(input.nextLine());
@@ -104,7 +107,7 @@ public class NounPhrase {
 	}
 
 	public static String ranNoun(boolean whole) throws IOException {
-		Scanner input = new Scanner(new FileReader("Noun.txt"));
+		Scanner input = new Scanner(new FileReader(NOUN_FILE));
 
 		ArrayList<String> nouns = new ArrayList();
 		while (input.hasNext())
@@ -119,7 +122,7 @@ public class NounPhrase {
 	// returns a noun whose identification begins with one of the a array numbers;
 	// returns only 1 word
 	public static String ranNoun(String[] a) throws IOException {
-		Scanner input = new Scanner(new FileReader("Noun.txt"));
+		Scanner input = new Scanner(new FileReader(NOUN_FILE));
 		ArrayList<String> nouns = new ArrayList();
 		while (input.hasNext())
 			nouns.add(input.nextLine());
@@ -134,7 +137,7 @@ public class NounPhrase {
 
 	// whole means whetehr to return whole noun defenition
 	public static String ranNoun(String[] a, boolean whole) throws IOException {
-		Scanner input = new Scanner(new FileReader("Noun.txt"));
+		Scanner input = new Scanner(new FileReader(NOUN_FILE));
 		ArrayList<String> nouns = new ArrayList();
 		while (input.hasNext())
 			nouns.add(input.nextLine());
@@ -153,7 +156,7 @@ public class NounPhrase {
 	// whole means whetehr to return whole noun defenition
 	public static String ranNoun(String[] a, String[] group, boolean whole) throws IOException// WORK
 	{
-		Scanner input = new Scanner(new FileReader("Noun.txt"));
+		Scanner input = new Scanner(new FileReader(NOUN_FILE));
 		ArrayList<String> nouns = new ArrayList();
 		group = onlyNot(group); // goes to only "!"
 		while (input.hasNext())
@@ -186,7 +189,7 @@ public class NounPhrase {
 	/*
 	 * OLD CODE, public static String ranNoun(String [] a,String [] group, boolean
 	 * whole)throws IOException//WORK { Scanner input = new Scanner(new
-	 * FileReader("Noun.txt")); ArrayList<String> nouns= new ArrayList();
+	 * FileReader(NOUN_FILE)); ArrayList<String> nouns= new ArrayList();
 	 * while(input.hasNext()) nouns.add(input.nextLine()); ArrayList<String> noun=
 	 * new ArrayList(); String g ; for(int i = 0; i< nouns.size(); i++)
 	 * {////////Goes through nouns //
@@ -219,7 +222,7 @@ public class NounPhrase {
 
 	// returns a random Adjective
 	public static String ranAdj(String[] a, boolean whole) throws IOException {
-		Scanner input = new Scanner(new FileReader("Adjective.txt"));
+		Scanner input = new Scanner(new FileReader(ADJECTIVE_FILE));
 		ArrayList<String> verbs = new ArrayList();
 		while (input.hasNext())
 			verbs.add(input.nextLine());
@@ -313,7 +316,7 @@ public class NounPhrase {
 		}
 
 		ArrayList all = new ArrayList();
-		Scanner input = new Scanner(new FileReader("Noun.txt"));
+		Scanner input = new Scanner(new FileReader(NOUN_FILE));
 		{
 			String a = null; // to store input
 			String[] some = null; // some of the adjective IDs
@@ -498,7 +501,7 @@ public class NounPhrase {
 	// post: retuns an array of all other nouns with it's id at the beginning
 	public static String[] child(String noun) throws IOException {
 		String id = noun.split(" ")[0];
-		Scanner input = new Scanner(new FileReader("Noun.txt"));
+		Scanner input = new Scanner(new FileReader(NOUN_FILE));
 		ArrayList<String> nouns = new ArrayList();
 		nouns.add(noun);
 		while (input.hasNext()) {
@@ -540,7 +543,7 @@ public class NounPhrase {
 		}
 
 		ArrayList<String> all = new ArrayList();// IMPROVE: all and some are extra
-		Scanner input = new Scanner(new FileReader("Noun.txt"));
+		Scanner input = new Scanner(new FileReader(NOUN_FILE));
 		{
 			String a = null; // to store input
 			String[] some = null; // some of the adjective IDs
@@ -583,7 +586,7 @@ public class NounPhrase {
 		}
 
 		ArrayList<String> all = new ArrayList();// IMPROVE: all and some are extra
-		Scanner input = new Scanner(new FileReader("Noun.txt"));
+		Scanner input = new Scanner(new FileReader(NOUN_FILE));
 		{
 			String a = null; // to store input
 			String[] some = null; // some of the adjective IDs
