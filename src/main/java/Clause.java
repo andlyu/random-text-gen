@@ -259,7 +259,7 @@ public class Clause {
 		// =
 		// preposition
 		// String
-		NPPhraseSpec prepNP = nlgFactory.createNounPhrase(NounPhrase
+		NPPhraseSpec prepNP = nlgFactory.createNounPhrase(Noun
 				.ranNoun(PrepPhrase.posPreps(classVerb.getClassVerb()).split("--")[prepI].split("-")[1].split(",")));// prepositional
 		// phrase
 		prepNP.setDeterminer(Noun.ranDet());
@@ -297,7 +297,7 @@ public class Clause {
 			p = nlgFactory.createClause(n1p, Noun.word(v1), n2p);
 		} else// if intransitive
 		{
-			String n1 = NounPhrase.ranNoun(VerbPhrase.posNouns(v1).split(","));
+			String n1 = Noun.ranNoun(VerbPhrase.posNouns(v1).split(","));
 			NPPhraseSpec n1p = nlgFactory.createNounPhrase(n1);
 			n1p.setDeterminer(Noun.ranDet());
 			p = nlgFactory.createClause(n1p, v1);
