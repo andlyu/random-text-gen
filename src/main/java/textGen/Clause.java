@@ -1,3 +1,4 @@
+package textGen;
 // move 5.2.4.1.1.1  to names in Nouns.txt
 //Names can only be adults in NOuns.txt
 //WORK ON GROUPING

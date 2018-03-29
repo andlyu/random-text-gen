@@ -10,7 +10,7 @@ import java.io.StringReader;
 import simplenlg.framework.DocumentElement;
 import simplenlg.framework.NLGElement;
 import simplenlg.lexicon.Lexicon;
-import simplenlg.lexicon.NIHDBLexicon;
+//import simplenlg.lexicon.NIHDBLexicon;
 import simplenlg.lexicon.XMLLexicon;
 import simplenlg.realiser.english.Realiser;
 
@@ -178,7 +178,8 @@ public class XMLRealiser {
 		if (lexType == LexiconType.XML) {
 			lexicon = new XMLLexicon(lexFile);
 		} else if (lexType == LexiconType.NIHDB) {
-			lexicon = new NIHDBLexicon(lexFile);
+			//lexicon = new NIHDBLexicon(lexFile);
+			System.out.println("NIHDB FILE DOES NOT EXIST");
 		} else if (lexType == LexiconType.DEFAULT) {
 			lexicon = Lexicon.getDefaultLexicon();
 		}
