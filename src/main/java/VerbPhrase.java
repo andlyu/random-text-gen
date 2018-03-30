@@ -79,7 +79,49 @@ public class VerbPhrase {
 		return a.split(" ")[3].split(",");
 	}
 
+	// pre: noun is a whole noun
+	// post: returns up-groups associated with the noun (groups which the noun must
+	// be)
+	public String[] upGroups() throws IOException {
+		String n = classVerb;
+		String iD = n.split(" ")[0];
+		String[] iDs = iD.split("\\.");// makes the array of the total number of IDs, not the right iDs
+		int count = 0;
+		iDs[count++] = iD;
+		while (iD.contains(".")) {
+			iD = iD.substring(0, iD.lastIndexOf("."));
+			iDs[count++] = iD;
+		}
 
+		ArrayList<String> all = new ArrayList();// IMPROVE: all and some are extra
+		Scanner input = new Scanner(new FileReader(VERB_FILE));
+		{
+			String a = null; // to store input
+			String[] some = null; // some of the adjective IDs
+			count = iDs.length - 1;
+			while (input.hasNextLine() && count > -1) {
+				a = input.nextLine();
+				if (a.startsWith(iDs[count] + " ") || a.startsWith("-" + iDs[count] + " ")) {
+					try {
+						if (a.split(" ").length > 3 && a.split(" ")[3].charAt(0) != 'P')// P stands for pass
+							some = a.split(" ")[3].split(",");
+						if (some != null)
+							for (int i = 0; i < some.length; i++)
+								all.add(some[i]);
+						some = null;
+						count--;
+					} catch (Exception igrnored) {
+						System.out.println("WAZA NounPhrase.java");
+					}
+
+				}
+			}
+			if (all == null)
+				return null;
+		}
+		return all.toArray(new String[all.size()]);
+
+	}
 
 	// Pre: a is a whole noun whihc a verb can describe doing an action
 	// Post: randomly chooses a verb which that thing can be doing
@@ -133,8 +175,6 @@ public class VerbPhrase {
 		return false;
 	}
 
-	
-	
 	// returns the Noun-pairing part of a verb defention
 	public static String posNouns(String a) {
 		String out = a.split(" ")[2];

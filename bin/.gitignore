@@ -1,6 +1,4 @@
 /1.docx
-/lib/
-/simplenlg/
 /Clause.class
 /Noun.class
 /NounPhrase.class
@@ -9,4 +7,6 @@
 /Sentance.class
 /TestMain.class
 /VerbPhrase.class
+/lib/
+/simplenlg/
 /textGen/

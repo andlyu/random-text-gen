@@ -97,9 +97,6 @@ public class Noun {
 			return nouns.get((int) (Math.random() * nouns.size())).split(" ")[1];
 
 	}
-	
-	
-	
 
 	// whole means whetehr to return whole noun defenition
 	public static String ranNoun(String[] a, boolean whole) throws IOException {
@@ -116,22 +113,6 @@ public class Noun {
 		if (!whole)
 			return noun.get((int) (Math.random() * noun.size())).split(" ")[1];
 		return noun.get((int) (Math.random() * noun.size()));
-	}
-
-	// returns a noun whose identification begins with one of the a array numbers;
-	// returns only 1 word
-	public static String ranNoun(String[] a) throws IOException {
-		Scanner input = new Scanner(new FileReader(NOUN_FILE));
-		ArrayList<String> nouns = new ArrayList();
-		while (input.hasNext())
-			nouns.add(input.nextLine());
-		ArrayList<String> noun = new ArrayList();
-		String g;
-		for (int i = 0; i < nouns.size(); i++) {//////// Goes through nouns
-			if (Noun.wordWorks(nouns.get(i), a))
-				noun.add(nouns.get(i));
-		} ///////////////// ends the nouns
-		return noun.get((int) (Math.random() * noun.size())).split(" ")[1];
 	}
 
 	// pre: a is array of possible numbers, b is the group the noun must have
@@ -241,95 +222,6 @@ public class Noun {
 		return out;
 	}
 
-	// pre::a is a whole nounString
-	// Post:: returns the group number, returns null if none
-	public static String[] getGroup(String a) {
-		if (a.split(" ").length < 4)
-			return null;
-		return a.split(" ")[3].split(",");
-	}
-	
-
-	// pre: word is whole noun
-	// post: retuns an array of all other nouns with it's id at the beginning
-	public static String[] child(String noun) throws IOException {
-		String id = noun.split(" ")[0];
-		Scanner input = new Scanner(new FileReader(NOUN_FILE));
-		ArrayList<String> nouns = new ArrayList();
-		nouns.add(noun);
-		while (input.hasNext()) {
-			if (input.nextLine().equals(noun)) {
-				String temp = input.nextLine();
-				while (temp.split(" ")[0].equals(id) || temp.split(" ")[0].equals("-" + id))
-					nouns.add(input.nextLine());
-			}
-			break;
-		}
-		return nouns.toArray(new String[nouns.size()]);
-
-	}
-	
-	// pre: noun is a whole noun
-	// post: returns sub-groups associated with the noun
-	public static String[] subGroups(String noun) throws IOException {
-		List<String> all = Arrays.asList(Noun.child(noun));
-		List<String> out = new ArrayList();
-		for (int i = 0; i < all.size(); i++) {
-			if (Noun.getGroup(all.get(i)) != null)
-				out.addAll(Arrays.asList(Noun.getGroup(all.get(i))));
-
-		}
-		return out.toArray(new String[out.size()]);
-	}
-	
-
-	// pre: noun is a whole noun
-	// post: returns up-groups associated with the noun (groups which the noun must
-	// be)
-	public static String[] allGroups(String n) throws IOException {
-		String iD = n.split(" ")[0];
-		String[] iDs = iD.split("\\.");// makes the array of the total number of IDs, not the right iDs
-		int count = 0;
-		iDs[count++] = iD;
-		while (iD.contains(".")) {
-			iD = iD.substring(0, iD.lastIndexOf("."));
-			iDs[count++] = iD;
-		}
-
-		ArrayList<String> all = new ArrayList();// IMPROVE: all and some are extra
-		Scanner input = new Scanner(new FileReader(NOUN_FILE));
-		{
-			String a = null; // to store input
-			String[] some = null; // some of the adjective IDs
-			count = iDs.length - 1;
-			while (input.hasNextLine() && count > -1) {
-				a = input.nextLine();
-				if (a.startsWith(iDs[count] + " ") || a.startsWith("-" + iDs[count] + " ")) {
-					try {
-						if (a.split(" ").length > 3 && a.split(" ")[3].charAt(0) != 'P')// P stands for pass
-							some = a.split(" ")[3].split(",");
-					} catch (Exception igrnored) {
-						System.out.println("WAZA NounPhrase.java");
-					}
-					if (some != null)
-						for (int i = 0; i < some.length; i++)// RUN ERR
-							all.add(some[i]);
-					count--;
-				}
-			}
-			List<String> up = Arrays.asList(Noun.child(n));// IMPROVE thre is repediteveness with child(n)
-			for (int i = 0; i < all.size(); i++) {
-				if (Noun.getGroup(all.get(i)) != null)
-					all.addAll(Arrays.asList(Noun.getGroup(up.get(i))));
-
-			}
-			if (all.size() == 0)
-				return null;
-		}
-		return all.toArray(new String[all.size()]);
-
-	}
-	
 
 	// returs true is a has the bigining of noun
 	public static boolean wordWorks(String word, String[] a) {
