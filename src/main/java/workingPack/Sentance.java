@@ -1,3 +1,4 @@
+package workingPack;
 import simplenlg.framework.*;
 import simplenlg.lexicon.*;
 import simplenlg.realiser.english.*;
@@ -7,15 +8,14 @@ import java.util.*;
 import java.io.*;
 
 
-// things to do
-// classNoun
-public class TestMain {
+
+public class Sentance {
    private static String classNoun;
 
    private static Lexicon lexicon = Lexicon.getDefaultLexicon();
    private static NLGFactory nlgFactory = new NLGFactory(lexicon);
    private static Realiser realiser = new Realiser(lexicon);
-     
+      
 	public static final String ADJECTIVE_FILE = "lib/Adjective.txt";
 	public static final String NOUN_FILE = "lib/Noun.txt";
 	public static final String PREPOSITION_FILE = "lib/Preposition.txt";
@@ -23,21 +23,18 @@ public class TestMain {
    
    public static void main(String[] args)throws IOException {
    
-      for(int i = 0; i<150; i++)
+      for(int i = 0; i<50; i++)
       {
          SPhraseSpec ind = makeSentance();
-         SPhraseSpec dep = makeSentance();
-         if(Math.random()>.5)
-            dep.setFeature(Feature.COMPLEMENTISER, "because");
-         else
-            dep.setFeature(Feature.COMPLEMENTISER, "while");
+      
              
         // ind.addComplement(dep);
          String output = realiser.realiseSentence(ind);
          
          System.out.println(output);
+         
       }
-   
+
      // }
    
    }
@@ -55,7 +52,7 @@ public class TestMain {
     
    public static String ranNoun()throws IOException
    {
-      Scanner input = new Scanner(TestMain.class.getResourceAsStream(NOUN_FILE));
+      Scanner input = new Scanner(Sentance.class.getResourceAsStream(NOUN_FILE));
       ArrayList<String> nouns= new ArrayList();
       while(input.hasNext())
          nouns.add(input.nextLine());
@@ -64,7 +61,7 @@ public class TestMain {
    
    public static String ranPlace()throws IOException
    {
-      Scanner input = new Scanner(TestMain.class.getResourceAsStream(NOUN_FILE));
+      Scanner input = new Scanner(Sentance.class.getResourceAsStream(NOUN_FILE));
       ArrayList<String> nouns= new ArrayList();
       while(input.hasNext())
          nouns.add(input.nextLine());
@@ -79,7 +76,7 @@ public class TestMain {
    
    public static String ranLife()throws IOException
    {
-      Scanner input = new Scanner(TestMain.class.getResourceAsStream(NOUN_FILE));
+      Scanner input = new Scanner(Sentance.class.getResourceAsStream(NOUN_FILE));
       ArrayList<String> nouns= new ArrayList();
       while(input.hasNext())
          nouns.add(input.nextLine());
@@ -97,7 +94,7 @@ public class TestMain {
    // returns a noun whose identification begins with one of the a array numbers; returns only 1 word
    public static String ranNoun(String [] a)throws IOException
    {
-      Scanner input = new Scanner(TestMain.class.getResourceAsStream(NOUN_FILE));
+      Scanner input = new Scanner(Sentance.class.getResourceAsStream(NOUN_FILE));
       ArrayList<String> nouns= new ArrayList();
       while(input.hasNext())
          nouns.add(input.nextLine());
@@ -113,7 +110,7 @@ public class TestMain {
    //whole means whetehr to return whole noune defenition
    public static String ranNoun(String [] a, boolean whole)throws IOException
    {
-      Scanner input = new Scanner(TestMain.class.getResourceAsStream(NOUN_FILE));
+      Scanner input = new Scanner(Sentance.class.getResourceAsStream(NOUN_FILE));
       ArrayList<String> nouns= new ArrayList();
       while(input.hasNext())
          nouns.add(input.nextLine());
@@ -131,7 +128,7 @@ public class TestMain {
    
    public static String ranVerb(String [] a, boolean whole)throws IOException
    {
-      Scanner input = new Scanner(TestMain.class.getResourceAsStream(VERB_FILE));
+      Scanner input = new Scanner(Sentance.class.getResourceAsStream(VERB_FILE));
       ArrayList<String> verbs= new ArrayList();
       while(input.hasNext())
          verbs.add(input.nextLine());
@@ -151,7 +148,7 @@ public class TestMain {
    
    public static String ranPrep(String [] a)throws IOException
    {
-      Scanner input = new Scanner(TestMain.class.getResourceAsStream(PREPOSITION_FILE));
+      Scanner input = new Scanner(Sentance.class.getResourceAsStream(PREPOSITION_FILE));
       ArrayList<String> preps= new ArrayList();
       for(int i = 0; i<a.length; i++)
          a[i]=a[i].split("-")[0]; // ugly code, doesn't follow format
@@ -169,7 +166,7 @@ public class TestMain {
       
    public static String ranPrep(String [] a, boolean whole)throws IOException
    {
-      Scanner input = new Scanner(TestMain.class.getResourceAsStream(PREPOSITION_FILE));
+      Scanner input = new Scanner(Sentance.class.getResourceAsStream(PREPOSITION_FILE));
       ArrayList<String> preps= new ArrayList();
       for(int i = 0; i<a.length; i++)
          a[i]=a[i].split("-")[0]; // ugly code, doesn't follow format
@@ -189,7 +186,7 @@ public class TestMain {
    
    public static String ranAdj(String [] a, boolean whole)throws IOException
    {
-      Scanner input = new Scanner(TestMain.class.getResourceAsStream(ADJECTIVE_FILE));
+      Scanner input = new Scanner(Sentance.class.getResourceAsStream(ADJECTIVE_FILE));
       ArrayList<String> verbs= new ArrayList();
       while(input.hasNext())
          verbs.add(input.nextLine());
@@ -228,7 +225,7 @@ public class TestMain {
    //retruns prep with certain ID
    private static String certPrep(String a) throws IOException
    {
-      Scanner input = new Scanner(TestMain.class.getResourceAsStream(PREPOSITION_FILE));
+      Scanner input = new Scanner(Sentance.class.getResourceAsStream(PREPOSITION_FILE));
       String prep;
       while(input.hasNext())
       {
@@ -264,7 +261,7 @@ public class TestMain {
       }
    
       ArrayList all = new ArrayList();
-      Scanner input= new Scanner (TestMain.class.getResourceAsStream(NOUN_FILE));
+      Scanner input= new Scanner (Sentance.class.getResourceAsStream(NOUN_FILE));
       {
          String a = null; // to store input
          String [] some = null; // some of the adjective IDs
@@ -304,7 +301,7 @@ public class TestMain {
       }
    
       ArrayList all = new ArrayList();
-      Scanner input= new Scanner (TestMain.class.getResourceAsStream(VERB_FILE));
+      Scanner input= new Scanner (Sentance.class.getResourceAsStream(VERB_FILE));
       {
          String a = null; // to store input
          String [] some = null; // some of the adjective IDs
@@ -323,9 +320,6 @@ public class TestMain {
                         break;
                      }
             }
-         
-         
-                
          }
       }
       String [] out = new String [all.size()];//to be returned in String [] format
@@ -352,6 +346,7 @@ public class TestMain {
          n2 = ranNoun(posNouns(v1).split("-")[1].split(","),true); // object of sentance
          classNoun = n2; // sets subject of next sentance to n2
          dep = clauseOnNoun(n2);// makes a clause on the second noun
+      
          // creates multiple subjects
          CoordinatedPhraseElement n1p = manyNouns(v1);
          NPPhraseSpec n2p = nlgFactory.createNounPhrase(n2.split(" ")[1]);
@@ -363,12 +358,11 @@ public class TestMain {
       }
       else // if verb is intransitive
       {     
-         //     if(v1.countains("/"))
-         //                 String n1 = ranNoun(v1.split(" ")[2].split("/").split(","));       
          n1 = ranNoun(posNouns(v1).split(","),true);
          dep = clauseOnNoun(n1);// creates clause on the subject
-         NPPhraseSpec n1p = nlgFactory.createNounPhrase(n1.split(" ")[1]);
-         n1p.setDeterminer(ranDet());
+         CoordinatedPhraseElement n1p = manyNouns(v1);
+       //  NPPhraseSpec n1p = nlgFactory.createNounPhrase(n1.split(" ")[1]);
+       //  n1p.setDeterminer(ranDet());
          p = nlgFactory.createClause(n1p, word(v1));
       }
          // changing preposition
@@ -386,39 +380,12 @@ public class TestMain {
           //  if(Math.random()>.5)
          p.addComplement(pp);
             // creates a random tense
-         if (Math.random()<.33333)
+         if (Math.random()<.33333)//ONLY IF TRANSITIVE DOES THE TENSE CHANGE
             p.setFeature(Feature.TENSE, Tense.PAST);
          if (Math.random()<.5)
             p.setFeature(Feature.TENSE, Tense.FUTURE);
-          //  p.setFeature(Feature.COMPLEMENTISER, "because");
-         // creates random tense
-      }
-      if(dep!= null)
-      {
-         if(Math.random()>.5)
-            dep.setFeature(Feature.COMPLEMENTISER, "and");
-         if(Math.random()>.5)
-            dep.setFeature(Feature.COMPLEMENTISER, "because");
-         else
-            dep.setFeature(Feature.COMPLEMENTISER, "while");
-            
-            
-         p.addComplement(dep);
-      }
       
-            
-            
-      
-      else{
-         /*/ first prep preposition
-            NPPhraseSpec place = nlgFactory.createNounPhrase(ranNoun(new String[]{"3."}));// prepositional phrase
-            place.setDeterminer(ranDet());
-            pp = nlgFactory.createPrepositionPhrase();
-            pp.addComplement(place);
-            pp.setPreposition("in");/*///works wrong
-      }
-       //  if(Math.random()>.5)
-         //p.addComplement(pp);
+      }      
             
       String output = realiser.realiseSentence(p);
       return p;
@@ -456,15 +423,7 @@ public class TestMain {
          n1p.setDeterminer(ranDet());
          p = nlgFactory.createClause(n1p, word(v1));
       }
-         // changing preposition
-                // creates a random tense
-            //  p.setFeature(Feature.COMPLEMENTISER, "because");
-         // creates random tense
-      
-   
-       //  if(Math.random()>.5)
-         //p.addComplement(pp);
-            
+                  
       String output = realiser.realiseSentence(p);
       return p;
    }
@@ -477,15 +436,12 @@ public class TestMain {
       SPhraseSpec p;
       
       {
-         //n1 = "5.2.1.3.1 plane";
-         //  System.out.println(n1);// DEBUG
          String v1 = nounToVerb(n1)[(int)(Math.random()*(double)(nounToVerb(n1).length))];
          if((posNouns(v1).contains("-")))// if transitive
          {
             String n2 = ranNoun(posNouns(v1).split("-")[1].split(","),true);
             classNoun = n2;// makes the next sentance noun the object of this sentance
             NPPhraseSpec n1p = nlgFactory.createNounPhrase(n1.split(" ")[1]);
-          //  n1p.addPreModifier(ranAdj(nounToAdj(n1),false));
             n1p.setDeterminer("the");
             NPPhraseSpec n2p = nlgFactory.createNounPhrase(n2.split(" ")[1]);
                  ///// next two lines give adj
@@ -502,15 +458,7 @@ public class TestMain {
          }
       }
    
-         // changing preposition
-                // creates a random tense
-            //  p.setFeature(Feature.COMPLEMENTISER, "because");
-         // creates random tense
-      
-   
-       //  if(Math.random()>.5)
-         //p.addComplement(pp);
-            
+                 
       String output = realiser.realiseSentence(p);
       return p;
    }
@@ -521,10 +469,11 @@ public class TestMain {
    {
       int out = 0;
       double rand = Math.random();
-      double factor = .3;
+      double factor = .4;
       double curCompare = factor;
       while(rand<curCompare)
       {
+         curCompare*=factor;
          curCompare*=factor;
          out++;
       }
@@ -565,7 +514,6 @@ public class TestMain {
          for(int j = likely(); j>0; j--)  
             n3p.addPreModifier(ranAdj(nounToAdj(n1),false));
          n1p.addCoordinate(n3p);
-        // System.out.println(realiser.realise(n1p));
       }
       return n1p;
       

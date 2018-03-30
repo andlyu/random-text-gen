@@ -1,3 +1,4 @@
+package workingPack;
 
 public class Probability {
 

@@ -51,7 +51,7 @@ public class Sentance {
     
    public static String ranNoun()throws IOException
    {
-      Scanner input = new Scanner(new FileReader(NOUN_FILE));
+      Scanner input = new Scanner(Sentance.class.getResourceAsStream(NOUN_FILE));
       ArrayList<String> nouns= new ArrayList();
       while(input.hasNext())
          nouns.add(input.nextLine());
@@ -60,7 +60,7 @@ public class Sentance {
    
    public static String ranPlace()throws IOException
    {
-      Scanner input = new Scanner(new FileReader(NOUN_FILE));
+      Scanner input = new Scanner(Sentance.class.getResourceAsStream(NOUN_FILE));
       ArrayList<String> nouns= new ArrayList();
       while(input.hasNext())
          nouns.add(input.nextLine());
@@ -75,7 +75,7 @@ public class Sentance {
    
    public static String ranLife()throws IOException
    {
-      Scanner input = new Scanner(new FileReader(NOUN_FILE));
+      Scanner input = new Scanner(Sentance.class.getResourceAsStream(NOUN_FILE));
       ArrayList<String> nouns= new ArrayList();
       while(input.hasNext())
          nouns.add(input.nextLine());
@@ -93,7 +93,7 @@ public class Sentance {
    // returns a noun whose identification begins with one of the a array numbers; returns only 1 word
    public static String ranNoun(String [] a)throws IOException
    {
-      Scanner input = new Scanner(new FileReader(NOUN_FILE));
+      Scanner input = new Scanner(Sentance.class.getResourceAsStream(NOUN_FILE));
       ArrayList<String> nouns= new ArrayList();
       while(input.hasNext())
          nouns.add(input.nextLine());
@@ -109,7 +109,7 @@ public class Sentance {
    //whole means whetehr to return whole noune defenition
    public static String ranNoun(String [] a, boolean whole)throws IOException
    {
-      Scanner input = new Scanner(new FileReader(NOUN_FILE));
+      Scanner input = new Scanner(Sentance.class.getResourceAsStream(NOUN_FILE));
       ArrayList<String> nouns= new ArrayList();
       while(input.hasNext())
          nouns.add(input.nextLine());
@@ -127,7 +127,7 @@ public class Sentance {
    
    public static String ranVerb(String [] a, boolean whole)throws IOException
    {
-      Scanner input = new Scanner(new FileReader(VERB_FILE));
+      Scanner input = new Scanner(Sentance.class.getResourceAsStream(VERB_FILE));
       ArrayList<String> verbs= new ArrayList();
       while(input.hasNext())
          verbs.add(input.nextLine());
@@ -147,7 +147,7 @@ public class Sentance {
    
    public static String ranPrep(String [] a)throws IOException
    {
-      Scanner input = new Scanner(new FileReader(PREPOSITION_FILE));
+      Scanner input = new Scanner(Sentance.class.getResourceAsStream(PREPOSITION_FILE));
       ArrayList<String> preps= new ArrayList();
       for(int i = 0; i<a.length; i++)
          a[i]=a[i].split("-")[0]; // ugly code, doesn't follow format
@@ -165,7 +165,7 @@ public class Sentance {
       
    public static String ranPrep(String [] a, boolean whole)throws IOException
    {
-      Scanner input = new Scanner(new FileReader(PREPOSITION_FILE));
+      Scanner input = new Scanner(Sentance.class.getResourceAsStream(PREPOSITION_FILE));
       ArrayList<String> preps= new ArrayList();
       for(int i = 0; i<a.length; i++)
          a[i]=a[i].split("-")[0]; // ugly code, doesn't follow format
@@ -185,7 +185,7 @@ public class Sentance {
    
    public static String ranAdj(String [] a, boolean whole)throws IOException
    {
-      Scanner input = new Scanner(new FileReader(ADJECTIVE_FILE));
+      Scanner input = new Scanner(Sentance.class.getResourceAsStream(ADJECTIVE_FILE));
       ArrayList<String> verbs= new ArrayList();
       while(input.hasNext())
          verbs.add(input.nextLine());
@@ -224,7 +224,7 @@ public class Sentance {
    //retruns prep with certain ID
    private static String certPrep(String a) throws IOException
    {
-      Scanner input = new Scanner(new FileReader(PREPOSITION_FILE));
+      Scanner input = new Scanner(Sentance.class.getResourceAsStream(PREPOSITION_FILE));
       String prep;
       while(input.hasNext())
       {
@@ -260,7 +260,7 @@ public class Sentance {
       }
    
       ArrayList all = new ArrayList();
-      Scanner input= new Scanner (new FileReader(NOUN_FILE));
+      Scanner input= new Scanner (Sentance.class.getResourceAsStream(NOUN_FILE));
       {
          String a = null; // to store input
          String [] some = null; // some of the adjective IDs
@@ -300,7 +300,7 @@ public class Sentance {
       }
    
       ArrayList all = new ArrayList();
-      Scanner input= new Scanner (new FileReader(VERB_FILE));
+      Scanner input= new Scanner (Sentance.class.getResourceAsStream(VERB_FILE));
       {
          String a = null; // to store input
          String [] some = null; // some of the adjective IDs
