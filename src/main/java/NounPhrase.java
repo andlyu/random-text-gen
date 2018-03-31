@@ -7,6 +7,10 @@ import java.util.*;
 //mistake = off of only one noun
 import java.io.*;
 
+/**
+ * @author aland
+ *
+ */
 public class NounPhrase {
 	private String classNoun;// long, with all of the information
 	private CoordinatedPhraseElement phrase;
@@ -78,6 +82,9 @@ public class NounPhrase {
 		return realiser.realiseSentence(nlgFactory.createClause(phrase, null));
 	}
 
+	/**
+	 * @return converts the class to a NPPhraseSpec I think???
+	 */
 	public NPPhraseSpec toNPPhraseSpec() {
 		NPPhraseSpec out = nlgFactory.createNounPhrase(classNoun.split(" ")[1]);
 

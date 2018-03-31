@@ -1,6 +1,7 @@
 package textGen;
 
 public class Probability {
+
 	static int likely() {
 		return likely(.4);
 	}
@@ -15,7 +16,7 @@ public class Probability {
 		}
 		return out;
 	}
-	
+
 	// returns true if there are none a's in the array b
 	public static boolean containsNone(String[] a, String[] b) {
 		if (b == null)

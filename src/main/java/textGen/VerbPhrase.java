@@ -49,6 +49,7 @@ public class VerbPhrase {
 		try {
 			phrase = oneVerb();
 		} catch (IOException ex) {
+			ex.printStackTrace();
 			System.out.println("manyNounSbjs() is Wrong");
 		}
 	}
@@ -74,18 +75,14 @@ public class VerbPhrase {
 		return classVerb.split(" ")[1];
 	}
 
-	public static String[] getGroup(String a) {
-		if (a.split(" ").length < 4)
-			return null;
-		return a.split(" ")[3].split(",");
-	}
+
 
 
 
 	// Pre: a is a whole noun whihc a verb can describe doing an action
 	// Post: randomly chooses a verb which that thing can be doing
 	public void verbOnNoun(String a) throws IOException {
-		Scanner input = new Scanner(new FileReader(VERB_FILE));
+		Scanner input = new Scanner(VerbPhrase.class.getResourceAsStream(VERB_FILE));
 		ArrayList<String> verbs = new ArrayList();
 		while (input.hasNext())
 			verbs.add(input.nextLine());
@@ -108,14 +105,14 @@ public class VerbPhrase {
 	// if whole then returns the whole identity of teh verb
 	// retruns an verb out of an array of array a
 	public static String ranVerb(String[] a, boolean whole) throws IOException {
-		Scanner input = new Scanner(new FileReader(VERB_FILE));
+		Scanner input = new Scanner(VerbPhrase.class.getResourceAsStream(VERB_FILE));
 		ArrayList<String> verbs = new ArrayList();
 		while (input.hasNext())
 			verbs.add(input.nextLine());
 		ArrayList<String> verb = new ArrayList();
 		String g;
 		for (int i = 0; i < verbs.size(); i++) {//////// Goes through verbs
-			if (wordWorks(verbs.get(i), a))
+			if (Noun.wordWorks(verbs.get(i), a))
 				verb.add(verbs.get(i));
 		} ///////////////// ends the verbs
 		if (!whole)
@@ -123,19 +120,8 @@ public class VerbPhrase {
 		return verb.get((int) (Math.random() * verb.size()));
 	}
 
-	// Pre:: a are all of the posible ID's of the Word, word is the word bieng
-	// tested
-	// returs true is a has the bigining of word
-	private static boolean wordWorks(String word, String[] a) {
-		for (int i = 0; i < a.length; i++) {
-			if (!(word.length() < a[i].length()) && a[i].equals(word.substring(0, a[i].length())))
-				return true;
-		}
-		return false;
-	}
 
-	
-	
+	//Pre: a is a verb
 	// returns the Noun-pairing part of a verb defention
 	public static String posNouns(String a) {
 		String out = a.split(" ")[2];

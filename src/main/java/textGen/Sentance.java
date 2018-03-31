@@ -16,10 +16,8 @@ public class Sentance {
    private static NLGFactory nlgFactory = new NLGFactory(lexicon);
    private static Realiser realiser = new Realiser(lexicon);
       
-	public static final String ADJECTIVE_FILE = "lib/Adjective.txt";
 	public static final String NOUN_FILE = "lib/Noun.txt";
 	public static final String PREPOSITION_FILE = "lib/Preposition.txt";
-	public static final String VERB_FILE = "lib/Verb.txt";
    
    public static void main(String[] args)throws IOException {
    
@@ -39,11 +37,56 @@ public class Sentance {
    
    }
 
+  
+   public static String ranPlace()throws IOException
+   {
+      Scanner input = new Scanner(Sentance.class.getResourceAsStream(NOUN_FILE));
+      ArrayList<String> nouns= new ArrayList();
+      while(input.hasNext())
+         nouns.add(input.nextLine());
+      ArrayList<String> places= new ArrayList();
+      for(int i = 0; i< nouns.size(); i++)
+      {      
+         if((nouns.get(i).split(" ")[0]).split("\\.")[0].equals("3"))
+            places.add(nouns.get(i));
+      }
+      return places.get((int)(Math.random()*places.size())).split(" ")[1];
+   }
+   
+   public static String ranLife()throws IOException
+   {
+      Scanner input = new Scanner(Sentance.class.getResourceAsStream(NOUN_FILE));
+      ArrayList<String> nouns= new ArrayList();
+      while(input.hasNext())
+         nouns.add(input.nextLine());
+      ArrayList<String> life= new ArrayList();
+      String g ;
+      for(int i = 0; i< nouns.size(); i++)
+      {
+         g = (nouns.get(i).split(" ")[0]).split("\\.")[0];
+         if(g.equals("1")||g.equals("2"))
+            life.add(nouns.get(i));
+      }
+      return life.get((int)(Math.random()*life.size())).split(" ")[1];
+   }
+   
+
+      
  
+      // returs true is a has the bigining of noun
+   private static boolean wordWorks(String word, String [] a)
+   {
+      for(int i = 0; i<a.length; i++)
+      {
+         if(!(word.length()<a[i].length()) && a[i].equals(word.substring(0,a[i].length())))
+            return true; 
+      }
+      return false;
+   }
+   
 
    
-   //returns a random Preposition
-   
+ 
    
    public static SPhraseSpec makeSentance() throws IOException   {    
       String v1 = VerbPhrase.ranVerb(new String[]{"1","2"},true);
@@ -88,7 +131,7 @@ public class Sentance {
       {
          int prepI = (int)( Math.random()*PrepPhrase.posPreps(v1).split("--").length);// prepI = instance of prep in verb Def
          String prepS = PrepPhrase.ranPrep(PrepPhrase.posPreps(v1).split("--")[prepI].split("-")[0].split(",")); // prepS = preposition String
-         NPPhraseSpec prepNP = nlgFactory.createNounPhrase(Noun.ranNoun(PrepPhrase.posPreps(v1).split("--")[prepI].split("-")[1].split(",")));// prepositional phrase
+         NPPhraseSpec prepNP = nlgFactory.createNounPhrase(NounPhrase.ranNoun(PrepPhrase.posPreps(v1).split("--")[prepI].split("-")[1].split(",")));// prepositional phrase
          prepNP.setDeterminer(Noun.ranDet());
          pp = nlgFactory.createPrepositionPhrase();
          pp.addComplement(prepNP);
@@ -108,9 +151,8 @@ public class Sentance {
    }
    
   
-   
    // creates a "noun phrase" with many subjects and adjectives around which all agree with v1
-   static CoordinatedPhraseElement manyNouns(String v1)throws IOException
+   private static CoordinatedPhraseElement manyNouns(String v1)throws IOException
    {
       CoordinatedPhraseElement n1p = new CoordinatedPhraseElement();
       for(int i = Probability.likely(); i>=0; i--) 
