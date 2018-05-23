@@ -1,4 +1,5 @@
 package textGen;
+
 import simplenlg.framework.*;
 import simplenlg.lexicon.*;
 import simplenlg.realiser.english.*;
@@ -46,9 +47,16 @@ public class Noun {
 	public Noun() {
 		try {
 			classNoun = ranNoun(true);
-			noun = nlgFactory.createNounPhrase(classNoun.split(" ")[1]);// creates a phrase
+			noun = nlgFactory.createNounPhrase(classNoun.split(" ")[1]);// creates
+																		// a
+																		// phrase
 			if (classNoun.split(" ")[0].length() >= 6 && !(classNoun.split(" ")[0].substring(0, 6).equals("1.2.2.")
-					|| classNoun.split(" ")[0].substring(0, 6).equals("1.2.1.")))// checks for name/ to add determiner
+					|| classNoun.split(" ")[0].substring(0, 6).equals("1.2.1.")))// checks
+																					// for
+																					// name/
+																					// to
+																					// add
+																					// determiner
 				noun.setDeterminer(ranDet());
 			else if (classNoun.split(" ")[0].length() < 6)
 				noun.setDeterminer(ranDet());// ads determiner for small indexes
@@ -61,9 +69,16 @@ public class Noun {
 	public Noun(String a) {
 		try {
 			classNoun = a;
-			noun = nlgFactory.createNounPhrase(classNoun.split(" ")[1]);// creates a phrase
+			noun = nlgFactory.createNounPhrase(classNoun.split(" ")[1]);// creates
+																		// a
+																		// phrase
 			if (classNoun.split(" ")[0].length() >= 6 && !(classNoun.split(" ")[0].substring(0, 6).equals("1.2.2.")
-					|| classNoun.split(" ")[0].substring(0, 6).equals("1.2.1.")))// checks for name/ to add determiner
+					|| classNoun.split(" ")[0].substring(0, 6).equals("1.2.1.")))// checks
+																					// for
+																					// name/
+																					// to
+																					// add
+																					// determiner
 				noun.setDeterminer(ranDet());
 			else if (classNoun.split(" ")[0].length() < 6)
 				noun.setDeterminer(ranDet());// ads determiner for small indexes
@@ -75,9 +90,16 @@ public class Noun {
 	public Noun(String[] a) {
 		try {
 			classNoun = ranNoun(a, true);
-			noun = nlgFactory.createNounPhrase(classNoun.split(" ")[1]);// creates a phrase
+			noun = nlgFactory.createNounPhrase(classNoun.split(" ")[1]);// creates
+																		// a
+																		// phrase
 			if (classNoun.split(" ")[0].length() >= 6 && !(classNoun.split(" ")[0].substring(0, 6).equals("1.2.2.")
-					|| classNoun.split(" ")[0].substring(0, 6).equals("1.2.1.")))// checks for name/ to add determiner
+					|| classNoun.split(" ")[0].substring(0, 6).equals("1.2.1.")))// checks
+																					// for
+																					// name/
+																					// to
+																					// add
+																					// determiner
 				noun.setDeterminer(ranDet());
 			else if (classNoun.split(" ")[0].length() < 6)
 				noun.setDeterminer(ranDet());// ads determiner for small indexes
@@ -124,7 +146,8 @@ public class Noun {
 		group = onlyNot(group); // goes to only "!"
 		while (input.hasNext())
 			nouns.add(input.nextLine());
-		ArrayList<String> noun = new ArrayList(); // Group : upGroups(b.getClassNoun())
+		ArrayList<String> noun = new ArrayList(); // Group :
+													// upGroups(b.getClassNoun())
 		for (int i = 0; i < nouns.size(); i++) {//////// Goes through nouns
 			if (wordWorks(nouns.get(i), a)
 					&& (group == null || Probability.containsNone(group, upGroups(nouns.get(i)))))
@@ -162,11 +185,13 @@ public class Noun {
 	}
 
 	// pre: noun is a whole noun
-	// post: returns up-groups associated with the noun (groups which the noun must
+	// post: returns up-groups associated with the noun (groups which the noun
+	// must
 	// be)
 	public static String[] upGroups(String n) throws IOException {
 		String iD = n.split(" ")[0];
-		String[] iDs = iD.split("\\.");// makes the array of the total number of IDs, not the right iDs
+		String[] iDs = iD.split("\\.");// makes the array of the total number of
+										// IDs, not the right iDs
 		int count = 0;
 		iDs[count++] = iD;
 		while (iD.contains(".")) {
@@ -174,7 +199,8 @@ public class Noun {
 			iDs[count++] = iD;
 		}
 
-		ArrayList<String> all = new ArrayList();// IMPROVE: all and some are extra
+		ArrayList<String> all = new ArrayList();// IMPROVE: all and some are
+												// extra
 		Scanner input = new Scanner(Noun.class.getResourceAsStream(NOUN_FILE));
 		{
 			String a = null; // to store input
@@ -184,7 +210,10 @@ public class Noun {
 				a = input.nextLine();
 				if (a.startsWith(iDs[count] + " ") || a.startsWith("-" + iDs[count] + " ")) {
 					try {
-						if (a.split(" ").length > 3 && a.split(" ")[3].charAt(0) != 'P')// P stands for pass
+						if (a.split(" ").length > 3 && a.split(" ")[3].charAt(0) != 'P')// P
+																						// stands
+																						// for
+																						// pass
 							some = a.split(" ")[3].split(",");
 						if (some != null)
 							for (int i = 0; i < some.length; i++)// RUN ERR
@@ -205,7 +234,8 @@ public class Noun {
 	}
 
 	// array of groups
-	// only returns the indexes of the arrays with "!" at the beginning, reomoving
+	// only returns the indexes of the arrays with "!" at the beginning,
+	// reomoving
 	// the "!"
 	public static String[] onlyNot(String[] a) {
 		int size = 0;
@@ -222,7 +252,6 @@ public class Noun {
 		return out;
 	}
 
-
 	// returs true is a has the bigining of noun
 	public static boolean wordWorks(String word, String[] a) {
 		if (a == null)
@@ -233,5 +262,19 @@ public class Noun {
 				return true;
 		}
 		return false;
+	}
+
+	public static ArrayList<String> getAllNounsFromFile(boolean whole) {
+		Scanner input = new Scanner(Noun.class.getResourceAsStream(NOUN_FILE));
+		ArrayList<String> outNouns = new ArrayList();
+		while (input.hasNext()) {
+			String in = input.nextLine();
+			if (in.length() > 0 && in.split(" ").length > 1 && '-' != (in.split(" ")[0].charAt(0)))
+				if (whole) {
+					outNouns.add(in);
+				} else
+					outNouns.add(in.split(" ")[1]);
+		}
+		return outNouns;
 	}
 }

@@ -75,5 +75,6 @@ public class TestMain {
       return life.get((int)(Math.random()*life.size())).split(" ")[1];
    }
    
+   
   
 }

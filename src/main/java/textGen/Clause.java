@@ -1,4 +1,5 @@
 package textGen;
+
 // move 5.2.4.1.1.1  to names in Nouns.txt
 //Names can only be adults in NOuns.txt
 //WORK ON GROUPING
@@ -21,7 +22,6 @@ public class Clause {
 	private static Lexicon lexicon = Lexicon.getDefaultLexicon();
 	private static NLGFactory nlgFactory = new NLGFactory(lexicon);
 	private static Realiser realiser = new Realiser(lexicon);
-
 
 	public NounPhrase getClassNoun() {
 		return classNoun;
@@ -83,11 +83,11 @@ public class Clause {
 				if (d.getObjectNoun() != null) {
 					if (Math.random() < .5) {
 						c = new Clause(d.getObjectNoun());// waistfull
-						c.adjClause();
+						// c.adjClause();
 						System.out.println(c.toString());
 					}
 				}
-				d.adjClause();
+				// d.adjClause();
 			} else if (d.getObjectNoun() != null)
 				d = new Clause(d.getObjectNoun());
 			else if (Math.random() < .5) {
@@ -126,7 +126,9 @@ public class Clause {
 			classVerb = v2; // Sets classVerb
 			SPhraseSpec p;
 			// SPhraseSpec dep = null;
-			if (VerbPhrase.posNouns(v2.getClassVerb()).contains("-"))// if(verb is transitive)
+			if (VerbPhrase.posNouns(v2.getClassVerb()).contains("-"))// if(verb
+																		// is
+																		// transitive)
 			{
 
 				// creates multiple subjects
@@ -150,33 +152,12 @@ public class Clause {
 				classNoun = a;
 				p = nlgFactory.createClause(n1p, v2.getPhrase());
 				sent = p;
-				/*
-				 * if(groups!=null && groups.length != 0 && groups[0].equals("10.1")){//BAD{
-				 * sent = nlgFactory.createClause(classNoun.getPhrase(),classVerb.getPhrase(),
-				 * NounPhrase.ranAdj(NounPhrase.nounToAdj(classNoun.getClassNoun()),false)); }
-				 */
+
 			}
 			// changing preposition
 			classPrep = new PrepPhrase(classVerb, classNoun);
 			if (Math.random() < .5)
 				sent.addComplement(classPrep.getPrepPhrase());
-
-			/*
-			 * if(v2.getClassVerb().contains("/"))// temporary { int prepI = (int)(
-			 * Math.random()*posPreps(v2.getClassVerb()).split("--").length);// prepI =
-			 * instance of prep in verb Def String prepS =
-			 * ranPrep(posPreps(v2.getClassVerb()).split("--")[prepI].split("-")[0].split(
-			 * ",")); // prepS = preposition String NPPhraseSpec prepNP =
-			 * nlgFactory.createNounPhrase(ranNoun(posPreps(v2.getClassVerb()).split("--")[
-			 * prepI].split("-")[1].split(",")));// prepositional phrase
-			 * prepNP.setDeterminer(ranDet()); pp = nlgFactory.createPrepositionPhrase();
-			 * pp.addComplement(prepNP); pp.setPreposition(prepS); // if(Math.random()>.5)
-			 * p.addComplement(pp); // creates a random tense if (Math.random()<.33333)
-			 * p.setFeature(Feature.TENSE, Tense.PAST); if (Math.random()<.5)
-			 * p.setFeature(Feature.TENSE, Tense.FUTURE);
-			 * 
-			 * }
-			 */
 
 			String output = realiser.realiseSentence(p);
 		} catch (IOException ex) {
@@ -185,6 +166,118 @@ public class Clause {
 
 	}
 
+	/**
+	 * @param nouns
+	 *            -> the ids of the Nouns that can be used (no extending)
+	 * @param verbs
+	 *            -> the ids of the verbs that can be used
+	 * @param adjs
+	 *            -> the iDs of the adjectives that can be used
+	 */
+	public Clause(ArrayList<String> nouns, ArrayList<String> verbs, ArrayList<String> adjs) {
+		try {
+			VerbPhrase v2 = new VerbPhrase(verbs);
+			classVerb = v2; // Sets classVerb
+			SPhraseSpec p;
+			// SPhraseSpec dep = null;
+			if (VerbPhrase.posNouns(v2.getClassVerb()).contains("-"))
+			// if(verb is transitive)
+			{
+				// creates multiple subjects
+				NounPhrase a = new NounPhrase();// UGLY maybe null will work
+				a.manyNouns(v2.getClassVerb(), nouns, adjs);
+				classNoun = a;
+
+				// DirectObject
+
+				NounPhrase b = new NounPhrase();// WORK
+				b.manyNounObjs((String) v2.getClassVerb(), nouns, adjs);// CHECK
+				objectNoun = b;
+
+				p = nlgFactory.createClause(a.getPhrase(), v2.getPhrase(), b.getPhrase());
+				sent = p;
+			} else // if verb is intransitive
+			{
+				// creates multiple subjects
+				NounPhrase a = new NounPhrase();
+				CoordinatedPhraseElement n1p = a.manyNouns(v2.getClassVerb(), nouns, adjs);
+				classNoun = a;
+				p = nlgFactory.createClause(n1p, v2.getPhrase());
+				sent = p;
+
+			}
+			// changing preposition
+			classPrep = new PrepPhrase(classVerb, classNoun);
+			if (Math.random() < .5)
+				sent.addComplement(classPrep.getPrepPhrase());
+
+			String output = realiser.realiseSentence(p);
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * @param nouns only the nouns that are allowed (ids)
+	 * @param verbs only the verbs that are allowed (ids)
+	 * @param adjs only the adjectives that can be used (ids)
+	 * @param hiPriNouns the Nouns that should be used 
+	 * @param hiPriVerbs the Verbs that should be used
+	 * @param hiPriAdjs the Adjs that should be used
+	 * @param loPriNouns try to use these Nouns
+	 * @param loPriVerbs try to use these Verbs
+	 * @param loPriAdj try to use these Adjs
+	 */
+	public Clause(ArrayList<String> nouns, ArrayList<String> verbs, ArrayList<String> adjs,
+			ArrayList<String> hiPriNouns, ArrayList<String> hiPriVerbs, ArrayList<String> hiPriAdjs,
+			ArrayList<String> loPriNouns, ArrayList<String> loPriVerbs, ArrayList<String> loPriAdjs) {
+
+		try {
+			VerbPhrase v2 = new VerbPhrase(verbs, hiPriVerbs, loPriVerbs);
+			classVerb = v2; // Sets classVerb
+			SPhraseSpec p;
+			// SPhraseSpec dep = null;
+			if (VerbPhrase.posNouns(v2.getClassVerb()).contains("-"))
+			// if(verb is transitive)
+			{
+				// creates multiple subjects
+				NounPhrase a = new NounPhrase();// UGLY maybe null will work
+				a.manyNouns(v2.getClassVerb(), nouns, adjs,hiPriNouns, hiPriAdjs, loPriNouns, loPriAdjs);
+				classNoun = a;
+
+				// DirectObject
+
+				NounPhrase b = new NounPhrase();// WORK
+				b.manyNounObjs((String) v2.getClassVerb(), nouns, adjs, hiPriNouns, hiPriAdjs, loPriNouns, loPriAdjs);// CHECK
+				objectNoun = b;
+
+				p = nlgFactory.createClause(a.getPhrase(), v2.getPhrase(), b.getPhrase());
+				sent = p;
+			} else // if verb is intransitive
+			{
+				// creates multiple subjects
+				NounPhrase a = new NounPhrase();
+				CoordinatedPhraseElement n1p = a.manyNouns(v2.getClassVerb(), nouns, adjs, hiPriNouns, hiPriAdjs, loPriNouns, loPriAdjs);
+				classNoun = a;
+				p = nlgFactory.createClause(n1p, v2.getPhrase());
+				sent = p;
+
+			}
+			// changing preposition
+			classPrep = new PrepPhrase(classVerb, classNoun);
+			if (Math.random() < .5)
+				sent.addComplement(classPrep.getPrepPhrase());
+
+			String output = realiser.realiseSentence(p);
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	/**
+	 * @param a
+	 */
 	public Clause(NounPhrase a) {
 		try {
 			boolean adj = false;// TEMP
@@ -210,12 +303,12 @@ public class Clause {
 			if (Math.random() < .5)
 				sent.addComplement(classPrep.getPrepPhrase());
 		} catch (IOException ex) {
-			System.out.println("error line 160");
+			ex.printStackTrace();
 		}
 
 	}
 
-	public Clause(VerbPhrase a)// WORK
+	public Clause(VerbPhrase a)// WORK (i don't know what this is)
 	{
 		try {
 			classVerb = a;
@@ -250,12 +343,13 @@ public class Clause {
 	// Adds preposition phrase to the clause
 	public void addPrepositionPhrase() throws IOException {// WORK
 		PPPhraseSpec pp = null;
-		int prepI = (int) (Math.random() * PrepPhrase.posPreps(classVerb.getClassVerb()).split("--").length);// prepI =
+		int prepI = (int) (Math.random() * PrepPhrase.posPreps(classVerb.getClassVerb()).split("--").length);// prepI
+																												// =
 																												// instance
 																												// of
 		// prep in verb Def
-		String prepS = PrepPhrase.ranPrep(
-				PrepPhrase.posPreps(classVerb.getClassVerb()).split("--")[prepI].split("-")[0].split(",")); // prepS
+		String prepS = PrepPhrase
+				.ranPrep(PrepPhrase.posPreps(classVerb.getClassVerb()).split("--")[prepI].split("-")[0].split(",")); // prepS
 		// =
 		// preposition
 		// String
@@ -271,8 +365,6 @@ public class Clause {
 		sent.addComplement(pp);
 
 	}
-
-
 
 	// returns a String [] of Verbs indecies which corelate with the noun
 	public SPhraseSpec clauseOnVerb(String v1) throws IOException
@@ -311,6 +403,38 @@ public class Clause {
 	// pre: n1 is the full length of noun
 	public static SPhraseSpec clauseOnNoun(String n1) throws IOException
 
+	{
+		SPhraseSpec p;
+
+		{
+			String v1 = NounPhrase.nounToVerb(n1)[(int) (Math.random() * (double) (NounPhrase.nounToVerb(n1).length))];
+			if ((VerbPhrase.posNouns(v1).contains("-")))// if transitive
+			{
+				String n2 = Noun.ranNoun(VerbPhrase.posNouns(v1).split("-")[1].split(","), true);
+				NPPhraseSpec n1p = nlgFactory.createNounPhrase(n1.split(" ")[1]);
+				n1p.setDeterminer("the");
+				NPPhraseSpec n2p = nlgFactory.createNounPhrase(n2.split(" ")[1]);
+				///// next two lines give adj
+				for (int i = Probability.likely(); i > 0; i--)
+					n2p.addPreModifier(NounPhrase.ranAdj(NounPhrase.nounToAdj(n2), false));
+				n2p.setDeterminer(Noun.ranDet());
+				p = nlgFactory.createClause(n1p, Noun.word(v1), n2p);
+			} else// if intransitive
+			{
+				NPPhraseSpec n1p = nlgFactory.createNounPhrase(n1.split(" ")[1]);
+				n1p.setDeterminer(Noun.ranDet());
+				p = nlgFactory.createClause(n1p, Noun.word(v1));
+			}
+		}
+
+		String output = realiser.realiseSentence(p);
+		return p;
+	}	// returns a clause where the subject is the noun sent
+	// pre: n1 is the full length of noun
+	public static SPhraseSpec clauseOnNoun(String n1,ArrayList<String> nouns, ArrayList<String> verbs, ArrayList<String> adjs,
+			ArrayList<String> hiPriNouns, ArrayList<String> hiPriVerbs, ArrayList<String> hiPriAdjs,
+			ArrayList<String> loPriNouns, ArrayList<String> loPriVerbs, ArrayList<String> loPriAdj) throws IOException
+//TODO make this method incorporate high and low priority
 	{
 		SPhraseSpec p;
 

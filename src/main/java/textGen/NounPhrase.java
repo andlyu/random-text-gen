@@ -1,4 +1,5 @@
 package textGen;
+
 import simplenlg.framework.*;
 import simplenlg.lexicon.*;
 import simplenlg.realiser.english.*;
@@ -24,7 +25,6 @@ public class NounPhrase {
 	public static final String NOUN_FILE = "lib/Noun.txt";
 	public static final String VERB_FILE = "lib/Verb.txt";
 
-
 	public NounPhrase() {
 		try {
 			phrase = manyNounSbjs();
@@ -34,18 +34,30 @@ public class NounPhrase {
 	}
 
 	// Pre: a is the long noun on which the string is built
+	/**
+	 * @param a
+	 *            Noun definition on which the phrase is built
+	 */
 	public NounPhrase(String a) {
 		try {
 			classNoun = a;
 			CoordinatedPhraseElement n1p = new CoordinatedPhraseElement();
 
 			for (int i = likely(); i >= 0; i--) {
-				NPPhraseSpec n3p = nlgFactory.createNounPhrase(a.split(" ")[1]);// creates a phrase
+				NPPhraseSpec n3p = nlgFactory.createNounPhrase(a.split(" ")[1]);// creates
+																				// a
+																				// phrase
 				if (a.split(" ")[0].length() >= 6 && !(a.split(" ")[0].substring(0, 6).equals("1.2.2.")
-						|| a.split(" ")[0].substring(0, 6).equals("1.2.1.")))// checks for name/ to add determiner
+						|| a.split(" ")[0].substring(0, 6).equals("1.2.1.")))// checks
+																				// for
+																				// name/
+																				// to
+																				// add
+																				// determiner
 					n3p.setDeterminer(ranDet());
 				else if (a.split(" ")[0].length() < 6)
-					n3p.setDeterminer(ranDet());// ads determiner for small indexes
+					n3p.setDeterminer(ranDet());// ads determiner for small
+												// indexes
 				addAdj(n3p, a.split(" ")[1]);
 				n1p.addCoordinate(n3p);
 			}
@@ -90,7 +102,8 @@ public class NounPhrase {
 		NPPhraseSpec out = nlgFactory.createNounPhrase(classNoun.split(" ")[1]);
 
 		if (classNoun.split(" ")[0].length() >= 6 && !(classNoun.split(" ")[0].substring(0, 6).equals("1.2.2.")
-				|| classNoun.split(" ")[0].substring(0, 6).equals("1.2.1.")))// checks for name/ to add determiner
+				|| classNoun.split(" ")[0].substring(0, 6).equals("1.2.1.")))
+			// checks// for // name// to/ add// determiner
 			out.setDeterminer(ranDet());
 		else if (classNoun.split(" ")[0].length() < 6)
 			out.setDeterminer(ranDet());// ads determiner for small indexes
@@ -108,15 +121,11 @@ public class NounPhrase {
 	}
 
 	public static String ranNoun() throws IOException {
-		Scanner input = new Scanner(NounPhrase.class.getResourceAsStream(NOUN_FILE));
-		ArrayList<String> nouns = new ArrayList();
-		while (input.hasNext())
-			nouns.add(input.nextLine());
-		return nouns.get((int) (Math.random() * nouns.size())).split(" ")[1];
+		return ranNoun(false);
 	}
 
 	public static String ranNoun(boolean whole) throws IOException {
-		Scanner input = new Scanner(NounPhrase.class.getResourceAsStream(NOUN_FILE));//HERE
+		Scanner input = new Scanner(NounPhrase.class.getResourceAsStream(NOUN_FILE));// HERE
 
 		ArrayList<String> nouns = new ArrayList();
 		while (input.hasNext())
@@ -128,23 +137,20 @@ public class NounPhrase {
 
 	}
 
-	// returns a noun whose identification begins with one of the a array numbers;
+	// returns a noun whose identification begins with one of the a array
+	// numbers;
 	// returns only 1 word
+	/**
+	 * @param a
+	 *            -> an array of Nouns that can be selected
+	 * @return -> one of the Nouns who's iD is in the array
+	 * @throws IOException
+	 */
 	public static String ranNoun(String[] a) throws IOException {
-		Scanner input = new Scanner(NounPhrase.class.getResourceAsStream(NOUN_FILE));
-		ArrayList<String> nouns = new ArrayList();
-		while (input.hasNext())
-			nouns.add(input.nextLine());
-		ArrayList<String> noun = new ArrayList();
-		String g;
-		for (int i = 0; i < nouns.size(); i++) {//////// Goes through nouns
-			if (wordWorks(nouns.get(i), a))
-				noun.add(nouns.get(i));
-		} ///////////////// ends the nouns
-		return noun.get((int) (Math.random() * noun.size())).split(" ")[1];
+		return ranNoun(a, false);
 	}
 
-	// whole means whetehr to return whole noun defenition
+	// whole means whether to return whole noun definition
 	public static String ranNoun(String[] a, boolean whole) throws IOException {
 		Scanner input = new Scanner(NounPhrase.class.getResourceAsStream(NOUN_FILE));
 		ArrayList<String> nouns = new ArrayList();
@@ -161,27 +167,98 @@ public class NounPhrase {
 		return noun.get((int) (Math.random() * noun.size()));
 	}
 
+	// whole means whether to return whole noun definition
+	public static String ranNoun(String[] a, boolean whole, ArrayList<String> limVocab) throws IOException {
+		HashSet<String> limVocabSet = new HashSet();
+		for (String vocab : limVocab) {
+			limVocabSet.add(vocab);
+		}
+		Scanner input = new Scanner(NounPhrase.class.getResourceAsStream(NOUN_FILE));
+		ArrayList<String> nouns = new ArrayList();
+		String in;
+		while (input.hasNext()) {
+			in = input.nextLine();
+			if (limVocabSet.contains(in.split(" ")[0]))
+				nouns.add(in);
+		}
+		ArrayList<String> noun = new ArrayList();
+		String g;
+		for (int i = 0; i < nouns.size(); i++) {//////// Goes through nouns
+			if (wordWorks(nouns.get(i), a))
+				noun.add(nouns.get(i));
+		} ///////////////// ends the nouns
+		if (!whole)
+			return noun.get((int) (Math.random() * noun.size())).split(" ")[1];
+		return noun.get((int) (Math.random() * noun.size()));
+	}
+
+	/**
+	 * @param a
+	 *            the gramatical limitations on the words
+	 * @param whole
+	 *            whether the word should be whole or not
+	 * @param limVocab
+	 *            the user's limit on the word
+	 * @param hiPri
+	 *            if words work, 50% chance of being chosen
+	 * @param loPri
+	 *            if words work, 25 % chance of being chosen
+	 * @return returns a random word that complies with the limitations
+	 */
+	public static String ranNoun(String[] a, boolean whole, ArrayList<String> limVocab, ArrayList<String> hiPri,
+			ArrayList<String> loPri) {
+		HashSet<String> limVocabSet = new HashSet();
+		for (String vocab : limVocab) {
+			limVocabSet.add(vocab);
+		}
+		Scanner input = new Scanner(NounPhrase.class.getResourceAsStream(NOUN_FILE));
+		ArrayList<String> nouns = new ArrayList();
+		ArrayList<String> hiNouns = new ArrayList();
+		ArrayList<String> loNouns = new ArrayList();
+		String in;
+		while (input.hasNext()) {
+			in = input.nextLine();
+			if (limVocabSet.contains(in.split(" ")[0]))
+				nouns.add(in);
+		}
+		ArrayList<String> noun = new ArrayList();
+		String g;
+		for (int i = 0; i < nouns.size(); i++) {//////// Goes through nouns
+			if (wordWorks(nouns.get(i), a)) {
+				String loopNoun = nouns.get(i);
+				noun.add(loopNoun);
+				if (hiPri.contains(loopNoun.split(" ")[0]))
+					hiNouns.add(loopNoun);
+				if (loPri.contains(loopNoun.split(" ")[0]))
+					loNouns.add(loopNoun);
+			}
+		} ///////////////// ends the nouns
+		if (hiNouns.size() > 0 && Math.random() > .5) {
+			return wordFromWords(hiNouns, whole);
+		} else if (loNouns.size() > 0 && Math.random() > .5) {
+			return wordFromWords(loNouns, whole);
+		}
+		return wordFromWords(noun, whole);
+	}
+
+	/**
+	 * @param nounList
+	 *            the list of words that will be chosen from
+	 * @param whole
+	 *            whether the whole word or just the word will be returned
+	 * @return a word chosen from the list of nouns
+	 */
+	public static String wordFromWords(ArrayList<String> nounList, boolean whole) {
+		if (!whole)
+			return nounList.get((int) (Math.random() * nounList.size())).split(" ")[1];
+		return nounList.get((int) (Math.random() * nounList.size()));
+	}
+
 	// pre: a is array of possible numbers, b is the group the noun must have
 	// whole means whetehr to return whole noun defenition
-
-	/*
-	 * OLD CODE, public static String ranNoun(String [] a,String [] group, boolean
-	 * whole)throws IOException//WORK { Scanner input = new Scanner(new
-	 * FileReader(NOUN_FILE)); ArrayList<String> nouns= new ArrayList();
-	 * while(input.hasNext()) nouns.add(input.nextLine()); ArrayList<String> noun=
-	 * new ArrayList(); String g ; for(int i = 0; i< nouns.size(); i++)
-	 * {////////Goes through nouns //
-	 * if(wordWorks(nouns.get(i),a)&&overlap(subGroups(nouns.get(i)),group))
-	 * if(wordWorks(nouns.get(i),a)&&containsAll(group,allGroups(nouns.get(i))))
-	 * noun.add(nouns.get(i));
-	 * 
-	 * }/////////////////ends the nouns if(!whole) return
-	 * noun.get((int)(Math.random()*noun.size())).split(" ")[1]; try{ return
-	 * noun.get((int)(Math.random()*noun.size())); }catch(Exception ignored){
-	 * System.out.println("NounPhrase");} return null;//WORK }
-	 */
 	// array of groups
-	// only returns the indexes of the arrays with "!" at the beginning, reomoving
+	// only returns the indexes of the arrays with "!" at the beginning,
+	// reomoving
 	// the "!"
 	public static String[] onlyNot(String[] a) {
 		int size = 0;
@@ -218,6 +295,74 @@ public class NounPhrase {
 		return verb.get((int) (Math.random() * verb.size()));
 	}
 
+	// returns a random Adjective
+	public static String ranAdj(String[] a, boolean whole, ArrayList<String> limVocab) throws IOException {
+		HashSet<String> limVocabSet = new HashSet();
+		for (String vocab : limVocab) {
+			limVocabSet.add(vocab);
+		}
+		Scanner input = new Scanner(NounPhrase.class.getResourceAsStream(ADJECTIVE_FILE));
+		ArrayList<String> adjs = new ArrayList();
+		String in;
+		while (input.hasNext()) {
+			in = input.nextLine();
+			if (limVocabSet.contains(in.split(" ")[0]))
+				adjs.add(in);
+		}
+		ArrayList<String> verb = new ArrayList();
+		String g;
+		for (int i = 0; i < adjs.size(); i++) {//////// Goes through verbs
+			if (wordWorks(adjs.get(i), a))
+				verb.add(adjs.get(i));
+		} ///////////////// ends the verbs
+		if (verb.size() == 0)
+			return null;
+		if (!whole) {
+			return verb.get((int) (Math.random() * verb.size())).split(" ")[1];
+		}
+		return verb.get((int) (Math.random() * verb.size()));
+	}
+
+	// returns a random Adjective
+	public static String ranAdj(String[] a, boolean whole, ArrayList<String> limVocab, ArrayList<String> hiPriAdjs,
+			ArrayList<String> loPriAdjs) {
+		HashSet<String> limVocabSet = new HashSet();
+
+		for (String vocab : limVocab) {
+			limVocabSet.add(vocab);
+		}
+		Scanner input = null;
+		input = new Scanner(NounPhrase.class.getResourceAsStream(ADJECTIVE_FILE));
+
+		ArrayList<String> adjs = new ArrayList();
+		ArrayList<String> hiAdjs = new ArrayList();
+		ArrayList<String> loAdjs = new ArrayList();
+		String in;
+		while (input.hasNext()) {
+			in = input.nextLine();
+			if (limVocabSet.contains(in.split(" ")[0]))
+				adjs.add(in);
+		}
+		ArrayList<String> verb = new ArrayList();
+		String g;
+		for (int i = 0; i < adjs.size(); i++) {//////// Goes through verbs
+			if (wordWorks(adjs.get(i), a)) {
+				String loopAdj = adjs.get(i);
+				verb.add(loopAdj);
+				if (hiPriAdjs.contains(loopAdj.split(" ")[0]))
+					hiAdjs.add(loopAdj);
+				if (loPriAdjs.contains(loopAdj.split(" ")[0]))
+					loAdjs.add(loopAdj);
+			}
+		} ///////////////// ends the verbs
+		if (hiAdjs.size() > 0 && Math.random() > .5) {
+			return wordFromWords(hiAdjs, whole);
+		} else if (loAdjs.size() > 0 && Math.random() > .5) {
+			return wordFromWords(loAdjs, whole);
+		}
+		return wordFromWords(verb, whole);
+	}
+
 	// returs true is a has the bigining of noun
 	private static boolean wordWorks(String word, String[] a) {
 		if (a == null)
@@ -232,6 +377,16 @@ public class NounPhrase {
 
 	// pre: a is array of possible numbers, b is the group the noun must have
 	// whole means whetehr to return whole noun defenition
+	/**
+	 * @param a
+	 *            Array of Strings that the word can be chosen from
+	 * @param group
+	 *            the group that the noun must fall in
+	 * @param whole
+	 *            whether or not to return the whole definition
+	 * @return
+	 * @throws IOException
+	 */
 	public static String ranNoun(String[] a, String[] group, boolean whole) throws IOException// WORK
 	{
 		Scanner input = new Scanner(NounPhrase.class.getResourceAsStream(NOUN_FILE));
@@ -239,7 +394,8 @@ public class NounPhrase {
 		group = onlyNot(group); // goes to only "!"
 		while (input.hasNext())
 			nouns.add(input.nextLine());
-		ArrayList<String> noun = new ArrayList(); // Group : upGroups(b.getClassNoun())
+		ArrayList<String> noun = new ArrayList(); // Group :
+													// upGroups(b.getClassNoun())
 		for (int i = 0; i < nouns.size(); i++) {//////// Goes through nouns
 			if (wordWorks(nouns.get(i), a) && (group == null || containsNone(group, upGroups(nouns.get(i)))))
 				noun.add(nouns.get(i));
@@ -267,7 +423,8 @@ public class NounPhrase {
 	public static String[] nounToVerb(String n) throws IOException {
 
 		String iD = n.split(" ")[0];
-		String[] iDs = iD.split("\\.");// makes the array of the total number of IDs, not the right iDs
+		String[] iDs = iD.split("\\.");// makes the array of the total number of
+										// IDs, not the right iDs
 		int count = 0;
 		iDs[count++] = iD;
 		while (iD.contains(".")) {
@@ -284,8 +441,10 @@ public class NounPhrase {
 			while (input.hasNextLine()) {
 				a = input.nextLine();
 				if (a.charAt(0) != '-') {
-					String[] pos = a.split(" ")[2].split("/")[0].split("-")[0].split(",");// arrayList containing
-																							// posible Nouns
+					String[] pos = a.split(" ")[2].split("/")[0].split("-")[0].split(",");// arrayList
+																							// containing
+																							// posible
+																							// Nouns
 					for (int i = 0; i < iDs.length; i++)
 						for (int j = 0; j < pos.length; j++)
 							if (pos[j].equals(iDs[i])) {
@@ -295,7 +454,8 @@ public class NounPhrase {
 				}
 			}
 		}
-		String[] out = new String[all.size()];// to be returned in String [] format
+		String[] out = new String[all.size()];// to be returned in String []
+												// format
 		for (int i = 0; i < out.length; i++)
 			out[i] = (String) all.get(i); // could make the String earlier
 		return out;
@@ -341,7 +501,8 @@ public class NounPhrase {
 		}
 		return true;
 	}
-	///////////////////////// GROUPS END//////////////////////////////////////////
+	///////////////////////// GROUPS
+	///////////////////////// END//////////////////////////////////////////
 
 	// returns the Noun-pairing part of a verb defention
 	private static String posNouns(String a) {
@@ -356,7 +517,8 @@ public class NounPhrase {
 	public static String[] nounToAdj(String n) throws IOException {
 
 		String iD = n.split(" ")[0];
-		String[] iDs = iD.split("\\.");// makes the array of the total number of IDs, not the right iDs
+		String[] iDs = iD.split("\\.");// makes the array of the total number of
+										// IDs, not the right iDs
 		int count = 0;
 		iDs[count++] = iD;
 		while (iD.contains(".")) {
@@ -374,11 +536,13 @@ public class NounPhrase {
 				a = input.nextLine();
 				if (a.startsWith(iDs[count] + " ") || a.startsWith("-" + iDs[count] + " ")) {
 					try {
-						if (a.split(" ").length > 2 && a.split(" ")[2].charAt(0) != 'P')// P stands for pass
+						if (a.split(" ").length > 2 && a.split(" ")[2].charAt(0) != 'P')// P
+																						// stands
+																						// for
+																						// pass
 							some = a.split(" ")[2].split(",");
 					} catch (Exception ignored) {
-						System.out
-								.println(a + "HEHEHEHHEHEHEHEHEHHEHEHEHHEHHEHEHEHHEHEHEHHEHHEHEHEHHEHEHEHHEHHEHHEHEH");
+						ignored.printStackTrace();
 					}
 					if (some == null)
 						return null;
@@ -389,7 +553,8 @@ public class NounPhrase {
 				}
 			}
 		}
-		String[] out = new String[all.size()];// to be returned in String [] format
+		String[] out = new String[all.size()];// to be returned in String []
+												// format
 		for (int i = 0; i < out.length; i++)
 			out[i] = (String) all.get(i); // could make the String earlier
 		return out;
@@ -421,17 +586,29 @@ public class NounPhrase {
 		return out;
 	}
 
-	// creates a "noun phrase" with many subjects and adjectives around which all
+	// creates a "noun phrase" with many subjects and adjectives around which
+	// all
 	// agree with v1 (WHOLE)
+	/**
+	 * @param v1
+	 *            a whole verb defenition
+	 * @return a Noun phrase with many subjects and adjectives that work
+	 *         together
+	 * @throws IOException
+	 */
 	public CoordinatedPhraseElement manyNouns(String v1) throws IOException {
 		CoordinatedPhraseElement n1p = new CoordinatedPhraseElement();
 		for (int i = likely(); i >= 0; i--) {
-			String n1 = ranNoun(posNouns(v1).split("-")[0].split(","), true);// subject of sentance
+			String n1 = ranNoun(posNouns(v1).split("-")[0].split(","), true);// subject
+																				// of
+																				// sentance
 			classNoun = n1;
 			NPPhraseSpec n3p = nlgFactory.createNounPhrase(n1.split(" ")[1]);// NEW
 
 			if (n1.split(" ")[0].length() >= 6 && !(n1.split(" ")[0].substring(0, 6).equals("1.2.2.")
-					|| n1.split(" ")[0].substring(0, 6).equals("1.2.1.")))// checks for name
+					|| n1.split(" ")[0].substring(0, 6).equals("1.2.1.")))// checks
+																			// for
+																			// name
 				n3p.setDeterminer(ranDet());
 			else if (n1.split(" ")[0].length() < 6)
 				n3p.setDeterminer(ranDet());// ads determiner for small indexes
@@ -439,6 +616,81 @@ public class NounPhrase {
 			///// next two lines give adj
 			for (int j = likely(); j > 0; j--)
 				n3p.addPreModifier(ranAdj(nounToAdj(n1), false));
+			n1p.addCoordinate(n3p);
+			phrase = n1p;
+		}
+		return n1p;
+
+	}
+
+	/**
+	 * @param v1
+	 *            a whole verb defenition
+	 * @return a Noun phrase with many subjects and adjectives that work
+	 *         together
+	 * @throws IOException
+	 */
+	public CoordinatedPhraseElement manyNouns(String v1, ArrayList<String> limNouns, ArrayList<String> limAdjs)
+			throws IOException {
+		CoordinatedPhraseElement n1p = new CoordinatedPhraseElement();
+		for (int i = likely(); i >= 0; i--) {
+			String n1 = ranNoun(posNouns(v1).split("-")[0].split(","), true, limNouns);// subject
+			// of
+			// sentance
+			classNoun = n1;
+			NPPhraseSpec n3p = nlgFactory.createNounPhrase(n1.split(" ")[1]);// NEW
+
+			if (n1.split(" ")[0].length() >= 6 && !(n1.split(" ")[0].substring(0, 6).equals("1.2.2.")
+					|| n1.split(" ")[0].substring(0, 6).equals("1.2.1.")))// checks
+																			// for
+																			// name
+				n3p.setDeterminer(ranDet());
+			else if (n1.split(" ")[0].length() < 6)
+				n3p.setDeterminer(ranDet());// ads determiner for small indexes
+
+			///// next two lines give adj
+			for (int j = likely(); j > 0; j--)
+				n3p.addPreModifier(ranAdj(nounToAdj(n1), false, limAdjs));
+			n1p.addCoordinate(n3p);
+			phrase = n1p;
+		}
+		return n1p;
+
+	}
+
+	/**
+	 * @param v1
+	 *            a whole verb defenition
+	 * @return a Noun phrase with many subjects and adjectives that work
+	 *         together
+	 * @throws IOException
+	 */
+	public CoordinatedPhraseElement manyNouns(String v1, ArrayList<String> limNouns, ArrayList<String> limAdjs,
+			ArrayList<String> hiPriNouns, ArrayList<String> hiPriAdjs, ArrayList<String> loPriNouns,
+			ArrayList<String> loPriAdjs) {
+		CoordinatedPhraseElement n1p = new CoordinatedPhraseElement();
+		for (int i = likely(); i >= 0; i--) {
+			String n1 = ranNoun(posNouns(v1).split("-")[0].split(","), true, limNouns, hiPriNouns, loPriNouns);// subject
+			// of
+			// sentance
+			classNoun = n1;
+			NPPhraseSpec n3p = nlgFactory.createNounPhrase(n1.split(" ")[1]);// NEW
+			// Settign deteminer
+			if (n1.split(" ")[0].length() >= 6 && !(n1.split(" ")[0].substring(0, 6).equals("1.2.2.")
+					|| n1.split(" ")[0].substring(0, 6).equals("1.2.1.")))// checks
+																			// for
+																			// name
+				n3p.setDeterminer(ranDet());
+			else if (n1.split(" ")[0].length() < 6)
+				n3p.setDeterminer(ranDet());// ads determiner for small indexes
+
+			///// next two lines give adj
+			try {
+				for (int j = likely(); j > 0; j--)
+					n3p.addPreModifier(ranAdj(nounToAdj(n1), false, limAdjs, loPriAdjs, hiPriAdjs));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			n1p.addCoordinate(n3p);
 			phrase = n1p;
 		}
@@ -461,7 +713,12 @@ public class NounPhrase {
 			NPPhraseSpec n3p = nlgFactory.createNounPhrase(n1.split(" ")[1]);// NEW
 
 			if (n1.split(" ")[0].length() >= 6 && !(n1.split(" ")[0].substring(0, 6).equals("1.2.2.")
-					|| n1.split(" ")[0].substring(0, 6).equals("1.2.1.")))// checks for name/ to add determiner
+					|| n1.split(" ")[0].substring(0, 6).equals("1.2.1.")))// checks
+																			// for
+																			// name/
+																			// to
+																			// add
+																			// determiner
 				n3p.setDeterminer(ranDet());
 			else if (n1.split(" ")[0].length() < 6)
 				n3p.setDeterminer(ranDet());// ads determiner for small indexes
@@ -477,17 +734,22 @@ public class NounPhrase {
 	}
 
 	// pre: v = verb aroun which to make the noun
-	// post: changes NounPhrase to be built on the verb, all nouns agree with the
+	// post: changes NounPhrase to be built on the verb, all nouns agree with
+	// the
 	// verb
 	public CoordinatedPhraseElement manyNounSbjs(String v) throws IOException {
 		CoordinatedPhraseElement n1p = new CoordinatedPhraseElement();
 		for (int i = likely(); i >= 0; i--) {
-			String n1 = ranNoun(posNouns(v).split("-")[0].split(","), true);// subject of sentance
+			String n1 = ranNoun(posNouns(v).split("-")[0].split(","), true);// subject
+																			// of
+																			// sentance
 			classNoun = n1;
 			NPPhraseSpec n3p = nlgFactory.createNounPhrase(n1.split(" ")[1]);// NEW
 
 			if (n1.split(" ")[0].length() >= 6 && !(n1.split(" ")[0].substring(0, 6).equals("1.2.2.")
-					|| n1.split(" ")[0].substring(0, 6).equals("1.2.1.")))// checks for name
+					|| n1.split(" ")[0].substring(0, 6).equals("1.2.1.")))// checks
+																			// for
+																			// name
 				n3p.setDeterminer(ranDet());
 			else if (n1.split(" ")[0].length() < 6)
 				n3p.setDeterminer(ranDet());// ads determiner for small indexes
@@ -502,18 +764,33 @@ public class NounPhrase {
 	}
 
 	// pre: v = verb aroun which to make the noun
-	// post: changes NounPhrase to be built on the verb, all nouns agree with the
+	// post: changes NounPhrase to be built on the verb, all nouns agree with
+	// the
 	// verb
+	/**
+	 * @param v
+	 *            the whole verb around which the phrase gets built
+	 * @return A phrase that will be the object of the sentence and works with
+	 *         the verb
+	 * @throws IOException
+	 */
 	public CoordinatedPhraseElement manyNounObjs(String v) throws IOException {
 
 		CoordinatedPhraseElement n1p = new CoordinatedPhraseElement();
 		for (int i = likely(); i >= 0; i--) {
-			String n1 = ranNoun(posNouns(v).split("-")[1].split(","), true); // object of sentance
+			String n1 = ranNoun(posNouns(v).split("-")[1].split(","), true); // object
+																				// of
+																				// sentance
 			classNoun = n1;
 			NPPhraseSpec n3p = nlgFactory.createNounPhrase(n1.split(" ")[1]);// NEW
 
 			if (n1.split(" ")[0].length() >= 6 && !(n1.split(" ")[0].substring(0, 6).equals("1.2.2.")
-					|| n1.split(" ")[0].substring(0, 6).equals("1.2.1.")))// checks for name/ to add determiner
+					|| n1.split(" ")[0].substring(0, 6).equals("1.2.1.")))// checks
+																			// for
+																			// name/
+																			// to
+																			// add
+																			// determiner
 				n3p.setDeterminer(ranDet());
 			else if (n1.split(" ")[0].length() < 6)
 				n3p.setDeterminer(ranDet());// ads determiner for small indexes
@@ -521,6 +798,82 @@ public class NounPhrase {
 			///// next two lines give adj
 			for (int j = likely(); j > 0; j--)
 				n3p.addPreModifier(ranAdj(nounToAdj(n1), false));
+			n1p.addCoordinate(n3p);
+		}
+		phrase = n1p;
+		return n1p;
+
+	}
+
+	// pre: v = verb aroun which to make the noun
+	// post: changes NounPhrase to be built on the verb, all nouns agree with
+	// the
+	// verb
+	/**
+	 * @param v
+	 *            the whole verb around which the phrase gets built
+	 * @return A phrase that will be the object of the sentence and works with
+	 *         the verb
+	 * @throws IOException
+	 */
+	public CoordinatedPhraseElement manyNounObjs(String v, ArrayList<String> limNouns, ArrayList<String> limAdjs)
+			throws IOException {
+
+		CoordinatedPhraseElement n1p = new CoordinatedPhraseElement();
+		for (int i = likely(); i >= 0; i--) {
+			String n1 = ranNoun(posNouns(v).split("-")[1].split(","), true, limNouns); // object
+			// of
+			// sentance
+			classNoun = n1;
+			NPPhraseSpec n3p = nlgFactory.createNounPhrase(n1.split(" ")[1]);// NEW
+
+			if (n1.split(" ")[0].length() >= 6 && !(n1.split(" ")[0].substring(0, 6).equals("1.2.2.")
+					|| n1.split(" ")[0].substring(0, 6).equals("1.2.1.")))// checks
+																			// for
+																			// name/
+																			// to
+																			// add
+																			// determiner
+				n3p.setDeterminer(ranDet());
+			else if (n1.split(" ")[0].length() < 6)
+				n3p.setDeterminer(ranDet());// ads determiner for small indexes
+
+			///// next two lines give adj
+			for (int j = likely(); j > 0; j--)
+				n3p.addPreModifier(ranAdj(nounToAdj(n1), false, limAdjs));
+			n1p.addCoordinate(n3p);
+		}
+		phrase = n1p;
+		return n1p;
+
+	}
+
+	public CoordinatedPhraseElement manyNounObjs(String v, ArrayList<String> limNouns, ArrayList<String> limAdjs,
+			ArrayList<String> hiPriNouns, ArrayList<String> hiPriAdjs, ArrayList<String> loPriNouns,
+			ArrayList<String> loPriAdjs) throws IOException {
+
+		CoordinatedPhraseElement n1p = new CoordinatedPhraseElement();
+		for (int i = likely(); i >= 0; i--) {
+			String n1 = ranNoun(posNouns(v).split("-")[1].split(","), true, limNouns, hiPriNouns, loPriNouns); // object
+			// of
+			// sentance
+			classNoun = n1;
+			NPPhraseSpec n3p = nlgFactory.createNounPhrase(n1.split(" ")[1]);// NEW
+
+			if (n1.split(" ")[0].length() >= 6 && !(n1.split(" ")[0].substring(0, 6).equals("1.2.2.")
+					|| n1.split(" ")[0].substring(0, 6).equals("1.2.1.")))// checks
+																			// for
+																			// name/
+																			// to
+																			// add
+																			// determiner
+				n3p.setDeterminer(ranDet());
+			else if (n1.split(" ")[0].length() < 6)
+				n3p.setDeterminer(ranDet());// ads determiner for small indexes
+
+			///// next two lines give adj
+			for (int j = likely(); j > 0; j--)
+				n3p.addPreModifier(ranAdj(nounToAdj(n1), false, limAdjs, hiPriAdjs, loPriAdjs));
 			n1p.addCoordinate(n3p);
 		}
 		phrase = n1p;
@@ -567,6 +920,11 @@ public class NounPhrase {
 
 	// pre: noun is a whole noun
 	// post: returns sub-groups associated with the noun
+	/**
+	 * @param noun
+	 * @return
+	 * @throws IOException
+	 */
 	public static String[] subGroups(String noun) throws IOException {
 		List<String> all = Arrays.asList(child(noun));
 		List<String> out = new ArrayList();
@@ -579,11 +937,20 @@ public class NounPhrase {
 	}
 
 	// pre: noun is a whole noun
-	// post: returns up-groups associated with the noun (groups which the noun must
+	// post: returns up-groups associated with the noun (groups which the noun
+	// must
 	// be)
+	/**
+	 * @param n
+	 *            the defenition of a noun/just the iD
+	 * @return an array of Strings that form the upper groups (all groups that a
+	 *         noun falls under)
+	 * @throws IOException
+	 */
 	public static String[] upGroups(String n) throws IOException {
 		String iD = n.split(" ")[0];
-		String[] iDs = iD.split("\\.");// makes the array of the total number of IDs, not the right iDs
+		String[] iDs = iD.split("\\.");// makes the array of the total number of
+										// IDs, not the right iDs
 		int count = 0;
 		iDs[count++] = iD;
 		while (iD.contains(".")) {
@@ -591,7 +958,8 @@ public class NounPhrase {
 			iDs[count++] = iD;
 		}
 
-		ArrayList<String> all = new ArrayList();// IMPROVE: all and some are extra
+		ArrayList<String> all = new ArrayList();// IMPROVE: all and some are
+												// extra
 		Scanner input = new Scanner(NounPhrase.class.getResourceAsStream(NOUN_FILE));
 		{
 			String a = null; // to store input
@@ -601,7 +969,10 @@ public class NounPhrase {
 				a = input.nextLine();
 				if (a.startsWith(iDs[count] + " ") || a.startsWith("-" + iDs[count] + " ")) {
 					try {
-						if (a.split(" ").length > 3 && a.split(" ")[3].charAt(0) != 'P')// P stands for pass
+						if (a.split(" ").length > 3 && a.split(" ")[3].charAt(0) != 'P')// P
+																						// stands
+																						// for
+																						// pass
 							some = a.split(" ")[3].split(",");
 						if (some != null)
 							for (int i = 0; i < some.length; i++)// RUN ERR
@@ -622,11 +993,13 @@ public class NounPhrase {
 	}
 
 	// pre: noun is a whole noun
-	// post: returns up-groups associated with the noun (groups which the noun must
+	// post: returns up-groups associated with the noun (groups which the noun
+	// must
 	// be)
 	public static String[] allGroups(String n) throws IOException {
 		String iD = n.split(" ")[0];
-		String[] iDs = iD.split("\\.");// makes the array of the total number of IDs, not the right iDs
+		String[] iDs = iD.split("\\.");// makes the array of the total number of
+										// IDs, not the right iDs
 		int count = 0;
 		iDs[count++] = iD;
 		while (iD.contains(".")) {
@@ -634,7 +1007,8 @@ public class NounPhrase {
 			iDs[count++] = iD;
 		}
 
-		ArrayList<String> all = new ArrayList();// IMPROVE: all and some are extra
+		ArrayList<String> all = new ArrayList();// IMPROVE: all and some are
+												// extra
 		Scanner input = new Scanner(NounPhrase.class.getResourceAsStream(NOUN_FILE));
 		{
 			String a = null; // to store input
@@ -644,7 +1018,10 @@ public class NounPhrase {
 				a = input.nextLine();
 				if (a.startsWith(iDs[count] + " ") || a.startsWith("-" + iDs[count] + " ")) {
 					try {
-						if (a.split(" ").length > 3 && a.split(" ")[3].charAt(0) != 'P')// P stands for pass
+						if (a.split(" ").length > 3 && a.split(" ")[3].charAt(0) != 'P')// P
+																						// stands
+																						// for
+																						// pass
 							some = a.split(" ")[3].split(",");
 					} catch (Exception igrnored) {
 						System.out.println("WAZA NounPhrase.java");
@@ -655,7 +1032,9 @@ public class NounPhrase {
 					count--;
 				}
 			}
-			List<String> up = Arrays.asList(child(n));// IMPROVE thre is repediteveness with child(n)
+			List<String> up = Arrays.asList(child(n));// IMPROVE thre is
+														// repediteveness with
+														// child(n)
 			for (int i = 0; i < all.size(); i++) {
 				if (getGroup(all.get(i)) != null)
 					all.addAll(Arrays.asList(getGroup(up.get(i))));
@@ -666,6 +1045,20 @@ public class NounPhrase {
 		}
 		return all.toArray(new String[all.size()]);
 
+	}
+
+	public static ArrayList<String> getAllAdjsFromFile(boolean whole) {
+		Scanner input = new Scanner(Noun.class.getResourceAsStream(ADJECTIVE_FILE));
+		ArrayList<String> outAdjs = new ArrayList();
+		while (input.hasNext()) {
+			String in = input.nextLine();
+			if (in.length() > 0 && in.split(" ").length > 1 && '-' != (in.split(" ")[0].charAt(0)))
+				if (whole) {
+					outAdjs.add(in);
+				} else
+					outAdjs.add(in.split(" ")[1]);
+		}
+		return outAdjs;
 	}
 
 }
