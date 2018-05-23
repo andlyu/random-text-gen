@@ -1,2 +1,7 @@
 1 but
 2 and
+3 for
+4 nor
+5 or
+6 yet
+7 so
