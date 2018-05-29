@@ -77,6 +77,12 @@ public class Clause {
 		Clause c = new Clause();
 		Clause d = new Clause();
 
+		for (int i = 0; i < 10; i++)
+			System.out.println(new Clause());
+
+		for (int i = 0; i < 10; i++)
+			System.out.println("Switching to complex testing");
+
 		for (int i = 0; i < 10000; i++) {
 
 			if (Math.random() < .5) {
@@ -219,15 +225,24 @@ public class Clause {
 	}
 
 	/**
-	 * @param nouns only the nouns that are allowed (ids)
-	 * @param verbs only the verbs that are allowed (ids)
-	 * @param adjs only the adjectives that can be used (ids)
-	 * @param hiPriNouns the Nouns that should be used 
-	 * @param hiPriVerbs the Verbs that should be used
-	 * @param hiPriAdjs the Adjs that should be used
-	 * @param loPriNouns try to use these Nouns
-	 * @param loPriVerbs try to use these Verbs
-	 * @param loPriAdj try to use these Adjs
+	 * @param nouns
+	 *            only the nouns that are allowed (ids)
+	 * @param verbs
+	 *            only the verbs that are allowed (ids)
+	 * @param adjs
+	 *            only the adjectives that can be used (ids)
+	 * @param hiPriNouns
+	 *            the Nouns that should be used
+	 * @param hiPriVerbs
+	 *            the Verbs that should be used
+	 * @param hiPriAdjs
+	 *            the Adjs that should be used
+	 * @param loPriNouns
+	 *            try to use these Nouns
+	 * @param loPriVerbs
+	 *            try to use these Verbs
+	 * @param loPriAdj
+	 *            try to use these Adjs
 	 */
 	public Clause(ArrayList<String> nouns, ArrayList<String> verbs, ArrayList<String> adjs,
 			ArrayList<String> hiPriNouns, ArrayList<String> hiPriVerbs, ArrayList<String> hiPriAdjs,
@@ -243,7 +258,7 @@ public class Clause {
 			{
 				// creates multiple subjects
 				NounPhrase a = new NounPhrase();// UGLY maybe null will work
-				a.manyNouns(v2.getClassVerb(), nouns, adjs,hiPriNouns, hiPriAdjs, loPriNouns, loPriAdjs);
+				a.manyNouns(v2.getClassVerb(), nouns, adjs, hiPriNouns, hiPriAdjs, loPriNouns, loPriAdjs);
 				classNoun = a;
 
 				// DirectObject
@@ -258,7 +273,8 @@ public class Clause {
 			{
 				// creates multiple subjects
 				NounPhrase a = new NounPhrase();
-				CoordinatedPhraseElement n1p = a.manyNouns(v2.getClassVerb(), nouns, adjs, hiPriNouns, hiPriAdjs, loPriNouns, loPriAdjs);
+				CoordinatedPhraseElement n1p = a.manyNouns(v2.getClassVerb(), nouns, adjs, hiPriNouns, hiPriAdjs,
+						loPriNouns, loPriAdjs);
 				classNoun = a;
 				p = nlgFactory.createClause(n1p, v2.getPhrase());
 				sent = p;
@@ -429,12 +445,14 @@ public class Clause {
 
 		String output = realiser.realiseSentence(p);
 		return p;
-	}	// returns a clause where the subject is the noun sent
-	// pre: n1 is the full length of noun
-	public static SPhraseSpec clauseOnNoun(String n1,ArrayList<String> nouns, ArrayList<String> verbs, ArrayList<String> adjs,
-			ArrayList<String> hiPriNouns, ArrayList<String> hiPriVerbs, ArrayList<String> hiPriAdjs,
-			ArrayList<String> loPriNouns, ArrayList<String> loPriVerbs, ArrayList<String> loPriAdj) throws IOException
-//TODO make this method incorporate high and low priority
+	} // returns a clause where the subject is the noun sent
+		// pre: n1 is the full length of noun
+
+	public static SPhraseSpec clauseOnNoun(String n1, ArrayList<String> nouns, ArrayList<String> verbs,
+			ArrayList<String> adjs, ArrayList<String> hiPriNouns, ArrayList<String> hiPriVerbs,
+			ArrayList<String> hiPriAdjs, ArrayList<String> loPriNouns, ArrayList<String> loPriVerbs,
+			ArrayList<String> loPriAdj) throws IOException
+	// TODO make this method incorporate high and low priority
 	{
 		SPhraseSpec p;
 

@@ -1,5 +1,5 @@
 -1 place
-1.4 under
+1.4 below
 1.5 near
 1.6 in 
 1.6.1 at
@@ -10,3 +10,6 @@
 4 on
 5 with
 6 using
+7 through
+-8 odball
+8.1 under
