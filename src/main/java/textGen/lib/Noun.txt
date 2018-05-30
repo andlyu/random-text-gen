@@ -226,6 +226,9 @@
 5.2.7.1.2 knife P
 5.2.7.1.3 spoon P
 5.2.7.1.4 spork P
+5.2.7.1.4 cup P
+5.2.7.1.4.1 chalice P
+5.2.7.1.4.2 goblet P
 -5.2.7.2 writing P
 5.2.7.2.1 pencil P
 5.2.7.2.2 pen P
@@ -234,6 +237,12 @@
 5.2.7.2.5 crayon P
 5.2.7.2.6 marker P
 5.2.7.2.7 highlighter P
+5.2.7.1 tool P
+5.2.7.1.2 vesicle
+5.2.7.1.2.1 bucket
+5.2.7.1.2.2 basket
+5.2.7.1.2.3 bag
+5.2.7.1.2.3.1 sack
 -5.2.8 craft P 10.2,10.2.3.2,10.2.3.2.2
 5.2.8.1 paper P 10.2.2
 5.2.8.2 wood P 10.2.2
