@@ -11,5 +11,7 @@
 5 with
 6 using
 7 through
--8 odball
+-8 oddball
 8.1 under
+8.1.1
+8.2 for

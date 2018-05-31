@@ -77,7 +77,7 @@ public class Clause {
 		Clause c = new Clause();
 		Clause d = new Clause();
 
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 1000; i++)
 			System.out.println(new Clause());
 
 		for (int i = 0; i < 10; i++)
@@ -131,6 +131,7 @@ public class Clause {
 			VerbPhrase v2 = new VerbPhrase();
 			classVerb = v2; // Sets classVerb
 			SPhraseSpec p;
+			System.out.println(v2);
 			// SPhraseSpec dep = null;
 			if (VerbPhrase.posNouns(v2.getClassVerb()).contains("-"))// if(verb
 																		// is
