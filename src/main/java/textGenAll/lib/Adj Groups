@@ -1,0 +1,35 @@
+water-body descriptions: 0.1.0.0.4.0
+size: 0.1.1.0.1.16.30.8 (grand, huge, wide, small)
+quality: 0.1.1.0.1.16.31.10 
+equality: 0.1.1.0.1.15.9.2
+weight: 0.1.1.0.1.16.21.19
+sanitary condition: 0.1.1.0.1.0.7.53
+property of age: 0.1.1.0.1.16.7
+tactile property: 0.1.1.0.1.16.12
+color property: 0.1.1.0.1.16.13.6
+physical property: 0.1.1.0.1.16.21
+other: 0.1.0.0.4.0.1.0
+temperature: 0.1.1.0.5.3.1
+dangerous: 0.1.1.0.1.15.5.5.1
+pace: 0.1.1.0.1.16.27.2
+temporal property: 0.1.1.0.1.16.27
+rate: 0.1.1.0.3.17.2
+taste: 0.1.1.0.0.0.11.0.3.4.4
+freshness: 0.1.1.0.1.16.7.6.1
+quality: 0.1.1.0.1.15
+condition: 0.1.1.0.1.0.7
+feeling: 0.1.1.0.1.0.0      					--- personal feelings
+trait: 0.1.1.0.1.5 								--- good for describing individual traits
+morality: 0.1.1.0.1.15.65,0.1.1.0.1.15.66
+information: 0.1.1.0.0.0.16						--- describes information like documents
+attitude: 0.1.1.0.0.0.18
+demeanor: 0.1.1.0.1.5.36 					--like attitude
+communication: 0.1.1.0.4						--- attitudes
+consistency: 0.1.1.0.1.16.10
+most_common traits: 0.1.1.0.1.5.0.0.0
+animal state: 0.1.1.0.1.0.0,0.1.1.0.1.0.1,0.1.1.0.1.0.2,0.1.1.0.1.0.6 --- feeling,skillfulness,cognitive,condition
+inteligence: 0.1.1.0.0.0.4.2
+animal traits: 0.1.1.0.1.15.85,0.1.1.0.1.15.87,0.1.1.0.1.15.88,0.1.1.0.1.15.87,0.1.1.0.1.15.89,0.1.1.0.1.15.90,0.1.1.0.1.15.100,0.1.1.0.1.15.101,0.1.1.0.1.15.102,0.1.1.0.1.15.120,0.1.1.0.1.15.127,0.1.1.0.1.15.129,0.1.1.0.1.15.133,0.1.1.0.1.15.135   ---worth, good , bad, well being, fruitlessness,etc
+good and bad: 0.1.1.0.1.15.87,0.1.1.0.1.15.88
+rarity: 0.1.1.0.1.15.39,0.1.1.0.1.15.40
+position: 0.1.1.0.3.2
