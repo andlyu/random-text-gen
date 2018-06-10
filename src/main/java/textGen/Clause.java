@@ -22,6 +22,9 @@ public class Clause {
 	private static Lexicon lexicon = Lexicon.getDefaultLexicon();
 	private static NLGFactory nlgFactory = new NLGFactory(lexicon);
 	private static Realiser realiser = new Realiser(lexicon);
+	
+	public static final String FREQ_FILE = "lib/WordOrder.txt";
+
 
 	public NounPhrase getClassNoun() {
 		return classNoun;

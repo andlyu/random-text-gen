@@ -14,7 +14,7 @@ public class Noun {
 	private static NLGFactory nlgFactory = new NLGFactory(lexicon);
 	private static Realiser realiser = new Realiser(lexicon);
 
-	public static final String NOUN_FILE = "/lib/Noun.txt";
+	public static final String NOUN_FILE = "lib/Noun.txt";
 
 	private String classNoun;
 	private ArrayList adj;

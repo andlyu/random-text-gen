@@ -1,4 +1,4 @@
-package textGenAll;
+package textGen;
 
 public class Probability {
 

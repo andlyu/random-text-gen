@@ -1,6 +1,84 @@
-Tangible Objects: 1,2,3.1,4,5.1,5.3,5.2.1,5.2.2,5.2.6,5.2.7
-Share cognitive info: 1,2,5.2.2.1
-Social media : 5.2.4.2.1
-Holdable: 4,5.1,5.2.6,5.2.7,5.2.8,5.2.9
-Fillable: 
+Tangible Objects: 0.2,0.3
+Share cognitive info: 0.2.1.10,0.2.1.22.4,0.3.0.2   --- creation, media, person
+social-media : 0.2.1.22.5							--- social media
+knowlege tool: 0.2.1.10,0.2.1.22.4					--- media & creation
+Holdable: 0.2.1.0.3,0.2.1.7,0.2.1.9.31,0.2.1.10,0.2.1.12,0.2.1.22.7,0.2.1.22.9,0.2.1.22.10.1,0.2.1.22.13 ---kitchen ware, comodity, clothing, creation, decoration, container, device, game_equip, implement
+Fillable: 0.1.1.0.5.5.6,0.2.1.22.7					--- container
+food: 		0.1.0.2.0
+living thing: 0.3
+person: 0.3.0.2
+animal: 0.3.0.3
+plant:  0.3.0.4
+vehicle: 0.2.1.22.8
+event: 0.1.1.0.0.2
+material: 0.1.0.2.8
+time: 0.1.1.0.1.2
+body-part 0.1.0.0.7.6
 (alt)-(shift)-(o)
+storage-space: 0.2.1.37.15.22
+structure/building: 0.2.1.37 
+openable: storage_space+structure = 0.2.1.37.15.22,0.2.1.37
+
+
+
+-0.1.1.0.0.0 cognition P
+
+-0.1.1.0.0.0.15 content P
+-0.1.1.0.0.0.15.10 representation P
+-0.1.1.0.0.0.15.10.8 percept P
+-0.1.1.0.0.0.15.11 belief P
+-0.1.1.0.0.0.15.14 goal P
+
+0.1.1.0.0.0.16 information P
+0.1.1.0.0.0.17 history P
+-0.1.1.0.0.0.18 attitude P
+
+-0.1.1.0.0.1 motivation P (things that motivate)
+-0.1.1.0.0.2 event P
+
+-0.1.1.0.0.2.0 act P
+
+-0.1.1.0.0.2.0.0 action P
+-0.1.1.0.0.2.0.0.2 accomplishment P
+-0.1.1.0.0.2.0.0.2.2 deed P
+-0.1.1.0.0.2.0.0.13 change P
+-0.1.1.0.0.2.0.0.13.14 motion P
+-0.1.1.0.0.2.0.0.13.15 movement P
+
+-0.1.1.0.0.2.0.8 activity P
+-0.1.1.0.0.2.0.8.4 diversion P
+-0.1.1.0.0.2.0.8.4.15 sport P
+-0.1.1.0.0.2.0.8.13 work P
+-0.1.1.0.0.2.0.8.16 occupation P
+-0.1.1.0.0.2.0.8.29 creation P
+
+-0.1.1.0.0.2.0.18 group_action P
+
+-0.1.1.0.0.2.3 happening P
+-0.1.1.0.0.2.4 social_event P
+
+-0.1.1.0.1 attribute 0.1.1.0.1.15,0.1.1.0.1.0.7 //quality,condition
+-0.1.1.0.1.0 state P
+-0.1.1.0.1.0.0 feeling P
+-0.1.1.0.1.0.2 cognitive_state P //his "health"/"confusion
+-0.1.1.0.1.0.7 condition P
+-0.1.1.0.1.0.7.60 environmental_condition P
+
+-0.1.1.0.1.1 shape P
+-0.1.1.0.1.5 trait P
+-0.1.1.0.1.15 quality P
+-0.1.1.0.1.16 property P
+
+-0.1.1.0.2 group P
+-0.1.1.0.2.0 arrangement P
+-0.1.1.0.2.7 collection P
+
+-0.1.1.0.3 relation P //This one's wierd. Financial, level, math, did not change much
+
+-0.1.1.0.4 writing
+-0.1.1.0.4.5 message P
+
+-0.1.1.0.5 measure P
+-0.1.1.0.5.5.6 containerful P
+
+-0.2.0 natural_object

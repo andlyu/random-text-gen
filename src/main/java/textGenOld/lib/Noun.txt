@@ -1,0 +1,330 @@
+1 person 1,2,3,4,5 10.1,10.2,10.2.1
+1.1 child P 10.2
+1.1.1 boy P 10.2.1.2
+1.1.2 girl P 10.2.1.2
+1.1.3 student P 10.2.1.2
+1.1.4 baby P 10.2.1.3
+1.2 adult P 10.2.1.2
+1.2.1 man P 10.4
+1.2.1.1 Stephen
+1.2.1.2 Oliver
+1.2.1.3 Jack
+1.2.1.4 Robert
+1.2.1.5 Harry
+1.2.1.6 Luke
+1.2.1.7 Ethan
+1.2.1.8 Jacob
+1.2.1.10 George 
+1.2.1.11 James
+1.2.1.12 Daniel
+1.2.1.13 Jacapo
+1.2.1.14 Max
+1.2.15 Quang 
+1.2.16 Henry
+1.2.2 woman P -10.4
+1.2.2.1 Chloe
+1.2.2.2 Emily
+1.2.2.3 Amy 
+1.2.2.4 Jennifer
+1.2.2.5 Hannah
+1.2.2.6 Jessica
+1.2.2.7 Kellie
+1.2.2.8 Sarah
+1.2.2.9 Rebecca
+1.2.2.10 Lauren
+1.2.2.11 Lilly
+1.2.2.12 Sophia
+1.2.2.13 Barbara
+1.2.2.14 Christina 
+1.2.2.15 Maddie
+1.2.2.16 Kate
+1.2.3 teacher
+1.2.3.1 profesor
+1.2.4 grown-up
+2 animal 1,2,3,4,5 10.1,10.2,10.2.1
+2.1 mammal
+2.1.1 pet 
+2.1.1.0 pet 10.2.1.2
+2.1.1.1 dog 10.2.1.2
+2.1.1.2 cat 10.2.1.2
+2.1.1.3 lizard 10.2.1.2
+2.1.1.4 turtle 10.2.1.2
+2.1.2 beast 
+2.1.2.0 beast 10.2.1.1
+2.1.2.1 monkey 10.2.1.2
+2.1.2.2 lion 10.2.1.2
+2.1.2.3 robot 10.2.1.2
+2.2 fish P 10.2.3.1,!10.2.3.2
+2.2.0 fish 10.2.1.3
+2.2.1 dolphin 10.2.1.2
+2.2.2 whale P 10.2.1.1
+2.3 bird P 10.2.1.3,10.2.3.3
+2.3.0 bird P 
+2.3.1 hawk P 
+2.3.2 eagle P
+2.3.3 crow P
+2.3.4 swan P
+2.3.5 dove P
+2.3.6 parrot P
+2.3.7 flamingo P
+2.3.8 pigeon P
+2.3.9 seagull P
+-3 place 2,3 10.2.4
+3.1 building P 10.2.1.1,10.2.3.2,10.2.3.2.2,-10.2.1.2,-10.2.1.3
+3.1.1 house P
+3.1.2 school P
+3.1.3 museum P
+3.1.4 store P
+3.1.4.1 shop P
+3.1.4.2 restaurant P 
+3.1.4.3 bakery P
+3.1.4.4 bookshop P
+3.1.4.5 boutique P
+3.1.4.6 salon P
+3.1.4.7 market P
+3.1.4.8 florist P
+3.1.4.9 bakery P
+3.1.4 office P
+3.1.5 church P
+3.1.5.1 cathedral P
+3.1.5.2 mosque P
+3.1.5.3 temple P
+3.1.5.4 synagogue
+3.1.6 warehouse P
+3.1.7 dentist P
+3.1.8 hospital P
+3.1.9 college P
+3.1.10 gym P
+-3.2 outside_place P 10.2.3.2.1,-10.2.1.3,-10.2.1.2,-10.2.1.1,-10.2,-10.2.1,10.2.2
+3.2.1 land P 10.2.3.2
+3.2.1.1 park P
+3.2.1.2 playground P
+3.2.1.3 field P
+3.2.1.4 forest P
+-3.2.2 water P 10.2.3.1
+3.2.2.1 pool
+3.2.2.2 river
+3.2.2.2.1 stream
+3.2.2.3 ocean
+3.2.2.4 sea
+4 food 1,2,3 10.2,10.2.1.2,10.2.3.2,10.2.3.2.2
+-4.1 raw P
+4.1.1 fruit P 10.3
+4.1.1.1 apple P
+4.1.1.2 banana P
+4.1.1.3 orange P
+4.1.1.4 guava P
+4.1.1.5 pear P
+4.1.1.6 tangerine P
+4.1.1.7 tomato P
+4.1.1.8 melon P
+4.1.1.8.1 wintermelon P
+4.1.1.8.2 watermelon P
+4.1.1.8.3 cantelope P
+4.1.1.8.4 honeydew P
+4.1.1.9 clementine P
+4.1.1.10 grapes P
+4.1.2 vegetables P
+-4.2 baked P
+4.3 candy P 10.3
+4.3.1 chocolate P
+4.3.2 hard candy P
+4.3.3 taffy P
+4.4 drink P
+4.4.1 water P
+4.4.2 soda P 10.3
+4.4.2.1 sprite P
+4.4.2.2 cola P
+4.4.2.3 root-beer P
+4.4.3 juce P
+4.4.3.3 lemonade P
+4.4.4 smoothie P
+4.4.5 tea P
+4.4.6 coffee 3.6.2
+4.4.6.2 macchiato P
+4.4.6.3 latte P
+4.4.6.4 frappe P
+4.4.7 milk P
+4.4.8 alcohol P
+4.4.8.1 vodka P
+4.4.8.2 rum P
+-5 nonlivingThing 3 
+-5.1 natural P 10.2
+5.1.1 plant P 10.3,10.2.3.2,10.2.3.2.1
+5.1.1.1 tree P 10.2.1.1
+5.1.1.2 bush P 10.2.1.2
+5.1.1.3 grass P
+5.1.1.4 flower P
+5.1.2 rock P 10.3,10.2.1.1,10.2.1.2,10.2.1.3
+5.1.3 mud P 10.3.2
+5.1.4 soil P
+-5.2 non-natural P
+-5.2.1 vehicle P 10.2,10.2.1,10.2.1.1
+-5.2.1.1 land P 10.2.3.2,10.2.3.2.1
+5.2.1.1.1 car P
+5.2.1.1.1.1 truck P
+5.2.1.1.2 tank P
+5.2.1.1.3 tractor P 
+-5.2.1.2 water P 10.2.3.1
+5.2.1.2.1 boat P 
+5.2.1.2.2 submarine P 
+5.2.1.2.3 canoe P 
+5.2.1.2.4 kayak P 
+5.2.1.2.5 yacht P
+-5.2.1.3 air P 10.2,10.2.3.3
+5.2.1.3.1 plane P
+5.2.1.3.2 helicopter P
+-5.2.2 education P 10.2.3.2,10.2.3.2.2
+5.2.2.1 text P 10.3
+5.2.2.1.2 textbook P 10.2,10.2.1,10.2.1.3
+5.2.2.1.3 lecture P 10.3
+5.2.2.1.1 book P 10.2,10.2.1,10.2.1.3
+-5.2.2.2 short_text P
+5.2.2.2.4 poem P 10.3
+5.2.2.2.5 story P 10.3
+5.2.2.2.6 joke P 10.3
+5.2.2.2.7 anecdotes P 10.3
+5.2.2.3 class P 10.3
+-5.2.3 inapropriate P 
+-5.2.4 entertainment P 10.3
+-5.2.4.1 physical_entertainment P
+5.2.4.1.1 game P 10.4
+-5.2.4.1.1.0 game P 10.2,10.2.1,10.4,10.2.1.1
+5.2.4.1.1.0.1 Risk P 10.4
+5.2.4.1.1.0.2 Chess P 10.4
+5.2.4.1.1.0.3 Go P 10.4
+-5.2.4.2 electronic_entertainment P
+5.2.4.2.1 social-media 
+5.2.4.2.1.1 instagram 
+5.2.4.2.1.2 facebook
+5.2.4.2.1.3 twitter
+5.2.4.2.1.4 pinterest
+5.2.4.2.1.5 snapchat
+5.2.4.2.1.6 tinder
+5.2.4.2.1.7 reddit 
+5.2.4.2.1.8 vine 
+-5.2.4.2.1.9 seekingArrangements 
+5.2.4.2.1.10 linkedIn
+-5.2.4.3 sport P 10.5
+-5.2.4.3.1 team P 10.4
+5.2.4.3.1.1 soccer P
+5.2.4.3.1.2 rowing P
+5.2.4.3.1.3 basketball P
+5.2.4.3.1.4 baseball P
+5.2.4.3.1.5 softball P 
+-5.2.4.3.2 individual P 10.4
+5.2.4.3.2.1 Gymanstics P
+5.2.4.3.2.2 swimming P
+5.2.4.3.2.3 tennis P
+-5.2.5 work P 10.3
+-5.2.5.1 inside P 
+-5.2.6 clothing P 10.2,10.2.1.3,10.2.3.2,10.2.3.2.2
+5.2.6.1 dress P 10.2.1,10.2.1.3
+5.2.6.2 necklace P 10.2.1,10.2.1.3
+5.2.7 utensil P 10.2,10.2.1,10.2.1.3,10.2.3.2,10.2.3.2.2
+-5.2.7.1 cooking P
+5.2.7.1.1 fork P
+5.2.7.1.2 knife P
+5.2.7.1.3 spoon P
+5.2.7.1.4 spork P
+5.2.7.1.4 cup P
+5.2.7.1.4.1 chalice P
+5.2.7.1.4.2 goblet P
+-5.2.7.2 writing P
+5.2.7.2.1 pencil P
+5.2.7.2.2 pen P
+5.2.7.2.3 brush P
+5.2.7.2.4 chalk P
+5.2.7.2.5 crayon P
+5.2.7.2.6 marker P
+5.2.7.2.7 highlighter P
+5.2.7.1 tool P
+5.2.7.1.2 vesicle P
+5.2.7.1.2.1 bucket P
+5.2.7.1.2.2 basket P
+5.2.7.1.2.3 bag P
+5.2.7.1.2.3.1 sack P
+-5.2.7.1.3 enhancing P
+-5.2.7.1.3.1 vision P
+5.2.7.1.3.1.1 glasses P
+-5.2.8 craft P 10.2,10.2.3.2,10.2.3.2.2
+5.2.8.1 paper P 10.2.2
+5.2.8.2 wood P 10.2.2
+5.2.8.3 board P 10.2.2
+5.2.8.4 cloth P 10.2.2
+-5.2.9 electronic P
+-5.2.10 body P 10.2,10.2.1,10.2.3.2,10.2.3.2.2
+5.2.10.1 soap P 10.2,10.2.1,10.2.1.3
+5.2.10.2 creme P 10.2,10.2.2
+5.2.10.3 towel P 10.2,10.2.1,10.2.1.2
+5.2.11 furniture P 
+5.2.11.1 chair P 
+5.2.11.2 table P 
+5.2.11.3 shelf P 
+-6 intangable 1
+6.1 electricity P
+-7 abstract 1 10.3
+-7.1 study P
+-7.1.1 math P
+-7.1.2 science P
+-7.1.3 social_scence P
+-7.1.4 language P
+-7.1.5 art P 10.2, 10.2.1
+7.1.5.1 painting P
+7.1.5.1.1 drawing P
+7.1.5.1.2 sketch P
+7.1.5.2 sculpture P
+-7.2 emotion P
+-7.2.1 positive P
+-7.2.1.1 happyness P
+-7.2.2 negative P
+-7.2.2.1 sadness P
+7.3 number 1
+7.3.1 one P
+7.3.2 two P
+7.3.3 three P
+7.3.4 four P
+7.3.5 five P
+7.3.6 six P
+7.3.7 seven P
+7.3.8 eight P
+7.3.9 nine P
+-7.4 time 4 
+7.4.1 morning P
+7.4.2 day P
+7.4.3 evening P
+7.4.4 night P
+-7.5 unit P
+-7.5.l time
+7.5.l.0 time P
+7.5.1.1 year P
+7.5.1.2 month P
+7.5.1.3 week P
+7.5.1.4 decade P
+7.5.1.5 century P
+7.5.1.6 fortnight P
+7.6 event P
+7.6.1 outing P
+7.6.2 dance P
+7.6.3 party P
+7.6.4 contest P
+7.6.4.1 competition P
+7.6.5 party P
+-10 groups P
+-10.1 living P
+-10.2 physical_thing P
+-10.2.1 Countable P
+-10.2.1.1 big(1M^3)
+-10.2.1.2 medium(PersonSize)
+-10.2.1.3 small(Holdable)
+-10.2.2 notCounable P
+-10.2.3 place P
+-10.2.3.1 inWater P
+-10.2.3.2 onLand P
+-10.2.3.2.1 outSide P
+-10.2.3.2.2 inSide P
+-10.2.3.3 inAir p
+-10.3 abstract P
+-10.4 Name P
+-10.5 activity P
+-10.6 knowlege P

@@ -1,4 +1,4 @@
-package textGenAll;
+package textGen;
 import simplenlg.framework.*;
 import simplenlg.lexicon.*;
 import simplenlg.realiser.english.*;

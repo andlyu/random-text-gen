@@ -1,4 +1,4 @@
-package textGenAll;
+package textGen;
 
 // move 5.2.4.1.1.1  to names in Nouns.txt
 //Names can only be adults in NOuns.txt
@@ -131,6 +131,7 @@ public class Clause {
 			VerbPhrase v2 = new VerbPhrase();
 			classVerb = v2; // Sets classVerb
 			SPhraseSpec p;
+			System.out.println(v2);
 			// SPhraseSpec dep = null;
 			if (VerbPhrase.posNouns(v2.getClassVerb()).contains("-"))// if(verb
 																		// is

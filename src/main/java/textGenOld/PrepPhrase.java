@@ -1,4 +1,4 @@
-package textGenAll;
+package textGen;
 import java.io.*;
 import java.util.*;
 import simplenlg.framework.*;

@@ -1,4 +1,4 @@
-package textGenAll;
+package textGen;
 
 import java.util.ArrayList;
 import java.util.Arrays;

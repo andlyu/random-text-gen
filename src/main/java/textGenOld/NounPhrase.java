@@ -1,4 +1,4 @@
-package textGenAll;
+package textGen;
 
 import simplenlg.framework.*;
 import simplenlg.lexicon.*;
@@ -536,13 +536,13 @@ public class NounPhrase {
 				a = input.nextLine();
 				if (a.startsWith(iDs[count] + " ") || a.startsWith("-" + iDs[count] + " ")) {
 					try {
-						if (a.split(" ").length > 2 && !"".equals(a.split(" ")[2]) && a.split(" ")[2].charAt(0) != 'P')// P
+						if (a.split(" ").length > 2 && a.split(" ")[2].charAt(0) != 'P')// P
 																						// stands
 																						// for
 																						// pass
 							some = a.split(" ")[2].split(",");
-					} catch (Exception e) {
-						e.printStackTrace();
+					} catch (Exception ignored) {
+						ignored.printStackTrace();
 					}
 					if (some == null)
 						return null;
